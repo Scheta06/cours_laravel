@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('psus', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->integer('power');
 
             $table->foreignId('vendor_id')
                 ->references('id')
                 ->on('vendors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('form_id')
+                ->references('id')
+                ->on('forms')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();

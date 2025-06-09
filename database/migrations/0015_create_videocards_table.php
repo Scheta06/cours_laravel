@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('videocards', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->integer('max_frequency');
 
             $table->foreignId('vendor_id')
                 ->references('id')

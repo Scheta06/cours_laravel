@@ -1,8 +1,7 @@
 <?php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\MemoryType;
 use Illuminate\Database\Seeder;
 
 class MemoryTypeSeeder extends Seeder
@@ -12,6 +11,26 @@ class MemoryTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $Array = [
+            [
+                'title' => 'ddr4',
+            ],
+            [
+                'title' => 'ddr5',
+            ],
+            [
+                'title' => 'gddr6',
+            ],
+            [
+                'title' => 'gddr6x',
+            ],
+            [
+                'title' => 'gddr7x',
+            ],
+        ];
+
+        foreach ($Array as $item) {
+            MemoryType::create($item);
+        }
     }
 }

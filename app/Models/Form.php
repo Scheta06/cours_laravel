@@ -17,4 +17,8 @@ class Form extends Model
     public function chassis() {
         return $this->hasMany(Chassis::class, 'form_id');
     }
+
+    public function psu() {
+        return $this->hasMany(Psu::class, 'form_id');
+    }
 }

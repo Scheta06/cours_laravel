@@ -1,8 +1,7 @@
 <?php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Socket;
 use Illuminate\Database\Seeder;
 
 class SocketSeeder extends Seeder
@@ -12,6 +11,23 @@ class SocketSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $Array = [
+            [
+                'title' => 'am4',
+            ],
+            [
+                'title' => 'am5',
+            ],
+            [
+                'title' => 'lga 1200',
+            ],
+            [
+                'title' => 'lga 1700',
+            ],
+        ];
+
+        foreach ($Array as $item) {
+            Socket::create($item);
+        }
     }
 }

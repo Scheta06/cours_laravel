@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chassis', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->foreignId('vendor_id')
                 ->references('id')

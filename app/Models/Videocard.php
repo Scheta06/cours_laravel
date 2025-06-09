@@ -9,6 +9,7 @@ class Videocard extends Model
     protected $fillable = [
         'title',
         'description',
+        'max_frequency',
         'vendor_id',
         'memory_capacity_id',
         'memory_type_id',

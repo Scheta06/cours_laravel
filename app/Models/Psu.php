@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,13 +9,21 @@ class Psu extends Model
         'title',
         'description',
         'vendor_id',
+        'form_id',
     ];
 
-    public function configuration() {
+    public function configuration()
+    {
         return $this->hasMany(Configuration::class, 'psu_id');
     }
 
-    public function vendor() {
+    public function vendor()
+    {
         return $this->belongsTo(Vendor::class);
+    }
+
+    public function form()
+    {
+        return $this->belongsTo(Form::class);
     }
 }

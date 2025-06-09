@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('rams', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->integer('count_of_modules');
 
             $table->foreignId('vendor_id')
                 ->references('id')

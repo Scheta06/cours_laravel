@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('processors', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('count_of_cores');
             $table->integer('count_of_streams');
             $table->float('base_frequency');
             $table->float('max_frequency');
-            
+
             $table->foreignId('vendor_id')
                 ->references('id')
                 ->on('vendors')

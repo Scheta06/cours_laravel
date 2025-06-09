@@ -1,8 +1,7 @@
 <?php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Storage;
 use Illuminate\Database\Seeder;
 
 class StorageSeeder extends Seeder
@@ -12,6 +11,20 @@ class StorageSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $Array = [
+            [
+                'title'              => 'mp33',
+                'description'        => '512 ГБ SSD M.2 накопитель Team Group MP33 [TM8FP6512G0C101] оснащается чипами памяти типа TLC 3D NAND, управление работой которых осуществляет контроллер Phison PS5013-E13-31. Данное тонкое (толщина всего 3.8 мм) устройство долговременной памяти форм-фактора 2280 производится специально для установки в компактный настольный системный блок, ноутбук или ультрабук, являясь средством повышения быстродействия системы. Низкие показатели энергопотребления модуля объемом 512 ГБ позволяют ноутбуку, в котором он смонтирован, продолжительное время работать от батареи.
+                M.2 накопитель Team Group MP33 [TM8FP6512G0C101] использует для подключения слот PCI-E 3.0 x4, демонстрируя высокую скорость записи (до 1400 МБайт/сек) и скорость считывания (до 1700 МБайт/сек) цифровых данных. Бесшумная в работе модель характеризуется высоким рабочим ресурсом, который производитель указывает на уровне 400 TBW.',
+                'read_speed'         => 1400,
+                'record_speed'       => 1700,
+                'vendor_id'          => 9,
+                'memory_capacity_id' => 14,
+            ],
+        ];
+
+        foreach ($Array as $item) {
+            Storage::create($item);
+        }
     }
 }

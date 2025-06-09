@@ -4,7 +4,7 @@
     <main class="main">
         <section class="build-creator">
             <div class="container">
-                <h1 class="section-title">Создать новую сборку</h1>
+                <h1 class="section-title" style="text-align: center">Создать новую сборку</h1>
 
                 <form class="build-form" action="{{ route('configuration') }}">
                     @method('POST')
@@ -25,11 +25,11 @@
                         @foreach ($componentList as $key => $value)
                                 <div class="component-category">
                                     <div class="category-header">
-                                        <i class="fas fa-microchip"></i>
+                                        <i class="{{ $value['i'] }}"></i>
                                         <h3>{{ $value['title'] }}</h3>
                                         <span class="status">Не выбрано</span>
                                     </div>
-                                    <a href="{{ route('catalog', ['component_title' => $key]) }}" type="button" class="btn btn-outline select-component">
+                                    <a href="{{ route('catalog', ['componentTitle' => $key]) }}" type="button" class="btn btn-outline select-component">
                                         {{ $value['placeholder'] }}
                                     </a>
                                 </div>

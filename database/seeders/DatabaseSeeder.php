@@ -1,8 +1,6 @@
 <?php
-
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +12,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            UserSeeder::class,
             VendorSeeder::class,
+            FormSeeder::class,
+            SocketSeeder::class,
+            ChipsetSeeder::class,
+            MemoryTypeSeeder::class,
+            MemoryCapacitySeeder::class,
+            ChipsetSeeder::class,
+            ProcessorSeeder::class,
+            MotherboardSeeder::class,
+            CoolerSeeder::class,
+            RamsSeeder::class,
+            StorageSeeder::class,
+            VideocardSeeder::class,
+            PsuSeeder::class,
+            ChassisSeeder::class,
+            ConfigurationSeeder::class,
         ]);
     }
 }
