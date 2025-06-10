@@ -7,7 +7,7 @@
             <div class="breadcrumbs">
                 <a href="{{ route('index') }}">Главная</a>
                 <i class="fas fa-chevron-right"></i>
-                <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}">Процессоры</a>
+                <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}">Видеокарты</a>
                 <i class="fas fa-chevron-right"></i>
                 <span>{{ $data->vendor->title }} {{ $data->title }}</span>
             </div>
@@ -52,20 +52,20 @@
                         <span class="spec-value">{{ $data->vendor->title }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Сокет</span>
-                        <span class="spec-value">{{ $data->socket->title }}</span>
+                        <span class="spec-name">Название</span>
+                        <span class="spec-value">{{ $data->title }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Ядра/потоки</span>
-                        <span class="spec-value">{{ $data->count_of_cores }}/{{ $data->count_of_streams }}</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-name">Базовая частота</span>
-                        <span class="spec-value">{{ $data->base_frequency }}</span>
-                    </div>
-                    <div class="spec-row">
-                        <span class="spec-name">Макс. частота</span>
+                        <span class="spec-name">Максимальная частота</span>
                         <span class="spec-value">{{ $data->max_frequency }}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-name">Вместимость видеопамяти (Гб)</span>
+                        <span class="spec-value">{{ $data->memoryCapacity->title }}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-name">Тип памяти </span>
+                        <span class="spec-value">{{ $data->memoryType->title }}</span>
                     </div>
             </div>
 

@@ -35,12 +35,7 @@
                                     <div class="product-specs">
                                         <div class="spec-item">
                                             <i class="fas fa-microchip"></i>
-                                            <span>{{ $item->count_of_cores }} ядер / {{ $item->count_of_streams }}
-                                                потоков</span>
-                                        </div>
-                                        <div class="spec-item">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                            <span>{{ $item->base_frequency }} - {{ $item->max_frequency }} GHz</span>
+                                            <span>Форм-фактор - {{ $item->form->title }}</span>
                                         </div>
                                     </div>
 

@@ -35,12 +35,15 @@
                                     <div class="product-specs">
                                         <div class="spec-item">
                                             <i class="fas fa-microchip"></i>
-                                            <span>{{ $item->count_of_cores }} ядер / {{ $item->count_of_streams }}
-                                                потоков</span>
+                                            <span>Тип памяти - {{ $item->memoryType->title }}</span>
                                         </div>
                                         <div class="spec-item">
                                             <i class="fas fa-tachometer-alt"></i>
-                                            <span>{{ $item->base_frequency }} - {{ $item->max_frequency }} GHz</span>
+                                            <span>Вместимость - {{ $item->memoryCapacity->title }} Гб</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                            <span>Кол-во модулей - {{ $item->count_of_modules }}</span>
                                         </div>
                                     </div>
 

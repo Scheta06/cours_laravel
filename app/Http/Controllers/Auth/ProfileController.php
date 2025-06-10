@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use App\Models\Configuration;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,11 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('pages.auth.profile');
+        $configurationCount = Configuration::where(['user_id' => $user->id])->count();
+        return view('pages.auth.profile', [
+            'user' => $user,
+            'configurationCount' => $configurationCount
+        ]);
     }
 
     /**
@@ -39,13 +44,12 @@ class ProfileController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        return view('pages.auth.change-password');
     }
 
     /**
@@ -54,12 +58,7 @@ class ProfileController extends Controller
     public function update(Request $request, string $id)
     {
         $user = Auth::user();
-        $data = $request->validate([
-            'name'  => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users' . Auth::id(),
-        ]);
 
-        $user->update($data);
 
         return redirect()->route('login');
     }

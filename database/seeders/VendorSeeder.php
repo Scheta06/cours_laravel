@@ -13,39 +13,39 @@ class VendorSeeder extends Seeder
     {
         $Array = [
             [
-                'title' => 'amd',
+                'title' => 'AMD',
                 'type'  => 'processor',
             ],
             [
-                'title' => 'intel',
+                'title' => 'Intel',
                 'type'  => 'processor',
             ],
             [
-                'title' => 'msi',
+                'title' => 'MSI',
                 'type'  => '',
             ],
             [
-                'title' => 'asus',
+                'title' => 'Asus',
                 'type'  => '',
             ],
             [
-                'title' => 'cougar',
+                'title' => 'Cougar',
                 'type'  => '',
             ],
             [
-                'title' => 'id-cooling',
+                'title' => 'ID-COOLING',
                 'type'  => '',
             ],
             [
-                'title' => 'adata',
+                'title' => 'ADATA',
                 'type'  => '',
             ],
             [
-                'title' => 'g.skill',
+                'title' => 'G.Skill',
                 'type'  => '',
             ],
             [
-                'title' => 'teamgroup',
+                'title' => 'TEAMGROUP',
                 'type'  => '',
             ],
         ];

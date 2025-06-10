@@ -1,3 +1,4 @@
-<div>
-    <!-- We must ship. - Taylor Otwell -->
-</div>
+@extends('layouts.app')
+
+@section('content')
+@endsection

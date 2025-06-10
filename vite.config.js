@@ -9,9 +9,13 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/main.css',
                 'resources/css/auth.css',
+                'resources/css/profile.css',
                 'resources/css/index.css',
                 'resources/css/partials.css',
                 'resources/css/catalog.css',
+                'resources/css/cart.css',
+                'resources/css/admin.css',
+                'resources/css/createItem.css',
                 'resources/js/app.js'
             ],
             refresh: true,
