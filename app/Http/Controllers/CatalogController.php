@@ -34,7 +34,7 @@ class CatalogController extends Controller
                 $data  = Cooler::with(['vendor'])->get();
                 break;
             case 'storages':
-                $title = 'Хранилище';
+                $title = 'Накопители';
                 $data  = Storage::with(['vendor'])->get();
                 break;
             case 'rams':

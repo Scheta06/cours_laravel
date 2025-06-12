@@ -19,7 +19,7 @@
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Контакты</h3>
+                <h3>Контакты</h3> 
                 <ul>
                     <li><i class="fas fa-envelope"></i> schetacrown06@gmail.com</li>
                     <li><i class="fas fa-phone"></i> +7 (800) 800-66-66</li>

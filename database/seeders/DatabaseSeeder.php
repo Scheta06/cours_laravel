@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             ChipsetSeeder::class,
             MemoryTypeSeeder::class,
             MemoryCapacitySeeder::class,
-            ChipsetSeeder::class,
             ProcessorSeeder::class,
             MotherboardSeeder::class,
             CoolerSeeder::class,

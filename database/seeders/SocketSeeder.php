@@ -13,16 +13,16 @@ class SocketSeeder extends Seeder
     {
         $Array = [
             [
-                'title' => 'am4',
+                'title' => 'AM4',
             ],
             [
-                'title' => 'am5',
+                'title' => 'AM5',
             ],
             [
-                'title' => 'lga 1200',
+                'title' => 'LGA 1200',
             ],
             [
-                'title' => 'lga 1700',
+                'title' => 'LGA 1700',
             ],
         ];
 

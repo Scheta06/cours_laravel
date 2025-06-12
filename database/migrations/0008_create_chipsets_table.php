@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('chipsets', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->enum('type', ['amd', 'intel']);
 
             $table->foreignId('socket_id')
                 ->references('id')

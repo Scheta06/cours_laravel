@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('count_of_streams');
             $table->float('base_frequency');
             $table->float('max_frequency');
+            $table->integer('tdp');
 
             $table->foreignId('vendor_id')
                 ->references('id')

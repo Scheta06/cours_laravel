@@ -10,6 +10,7 @@ class Rams extends Model
         'title',
         'description',
         'vendor_id',
+        'count_of_modules',
         'memory_capacity_id',
         'memory_type_id',
     ];

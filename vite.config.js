@@ -15,7 +15,10 @@ export default defineConfig({
                 'resources/css/catalog.css',
                 'resources/css/cart.css',
                 'resources/css/admin.css',
+                'resources/css/createItemCategory.css',
                 'resources/css/createItem.css',
+                'resources/css/manageItem.css',
+                'resources/css/notification.css',
                 'resources/js/app.js'
             ],
             refresh: true,

@@ -23,8 +23,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     //Главная страница админ-панели
     Route::get('/admin-panel', [AdminController::class, 'index'])->name('adminPanelForm');
-    Route::get('/admin-panel/create-item', [AdminController::class, 'create'])->name('categoryOfCreateItemForm');
-    Route::get('/admin-panel/create-item/{componentTitle}', [AdminController::class, 'show'])->name('createItemForm');
+    Route::get('/admin-panel/manage-item', [AdminController::class, 'items'])->name('manageItemForm');
+    Route::get('/admin-panel/create-item', [AdminController::class, 'category'])->name('categoryOfCreateItemForm');
+    Route::post('/admin-panel/create-item/{componentTitle}', [AdminController::class, 'store'])->name('storeItemForm');
+    Route::get('/admin-panel/create-item/{componentTitle}', [AdminController::class, 'create'])->name('createItemForm');
 });
 
 Route::middleware(['auth'])->group(function () {

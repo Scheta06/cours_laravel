@@ -13,27 +13,33 @@ class ChipsetSeeder extends Seeder
     {
         $Array = [
             [
-                'title'     => 'a520',
+                'title'     => 'A520',
+                'type'      => 'amd',
                 'socket_id' => 1,
             ],
             [
-                'title'     => 'b550',
+                'title'     => 'B550',
+                'type'      => 'amd',
                 'socket_id' => 1,
             ],
             [
-                'title'     => 'x570',
+                'title'     => 'X570',
+                'type'      => 'amd',
                 'socket_id' => 1,
             ],
             [
-                'title'     => 'h610',
+                'title'     => 'H610',
+                'type'      => 'intel',
                 'socket_id' => 4,
             ],
             [
-                'title'     => 'b760',
+                'title'     => 'B760',
+                'type'      => 'intel',
                 'socket_id' => 4,
             ],
             [
-                'title'     => 'z790',
+                'title'     => 'Z790',
+                'type'      => 'intel',
                 'socket_id' => 4,
             ],
         ];

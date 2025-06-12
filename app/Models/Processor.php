@@ -13,6 +13,7 @@ class Processor extends Model
         'count_of_streams',
         'base_frequency',
         'max_frequency',
+        'tdp',
         'vendor_id',
         'socket_id',
     ];

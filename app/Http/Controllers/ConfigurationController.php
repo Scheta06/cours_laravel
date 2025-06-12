@@ -33,8 +33,8 @@ class ConfigurationController extends Controller
                 'i' => 'fas fa-memory',
             ],
             'storages'     => [
-                'title'       => 'Хранилище',
-                'placeholder' => 'Выбрать хранилище',
+                'title'       => 'Накопитель',
+                'placeholder' => 'Выбрать накопитель',
                 'i' => 'fas fa-database',
             ],
             'videocards'     => [

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('success'))
+        <div class="notifications-container" id="notifications">
+            
+        </div>
+    @endif
     <main class="main admin-panel">
         <div class="container">
             <!-- Хлебные крошки -->
@@ -24,7 +29,7 @@
                     </div>
                     <h3>Управление товарами</h3>
                     <p>Редактирование, удаление и организация товаров в каталоге</p>
-                    <a href="admin-products.html" class="btn btn-primary">
+                    <a href="{{ route('manageItemForm') }}" class="btn btn-primary">
                         <i class="fas fa-arrow-right"></i> Перейти
                     </a>
                 </div>

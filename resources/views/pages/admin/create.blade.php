@@ -3,6 +3,11 @@
 @section('content')
     <main class="main admin-page">
         <div class="container">
+            @if (session('success'))
+                <div class="notifications-container" id="notifications">
+                    {{ session('success') }}
+                </div>
+            @endif
             <!-- Хлебные крошки -->
             <div class="breadcrumbs">
                 <a href="{{ route('index') }}">Главная</a>

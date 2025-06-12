@@ -8,6 +8,7 @@ class Psu extends Model
     protected $fillable = [
         'title',
         'description',
+        'power',
         'vendor_id',
         'form_id',
     ];
