@@ -22,12 +22,15 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register')
 Route::middleware(['auth', 'admin'])->group(function () {
 
     //Главная страница админ-панели
-    Route::get('/admin-panel', [AdminController::class, 'index'])->name('adminPanelForm');
-    Route::get('/admin-panel/manage-item', [AdminController::class, 'items'])->name('manageItemForm');
-    Route::delete('/admin-panel/manage-item/{componentTitle}/{componentId}', [AdminController::class, 'destroy'])->name('deleteItem');
-    Route::get('/admin-panel/create-item', [AdminController::class, 'category'])->name('categoryOfCreateItemForm');
-    Route::post('/admin-panel/create-item/{componentTitle}', [AdminController::class, 'store'])->name('storeItemForm');
-    Route::get('/admin-panel/create-item/{componentTitle}', [AdminController::class, 'create'])->name('createItemForm');
+    Route::get('/admin', [AdminController::class, 'index'])->name('adminPanelForm');
+    // Управление товарами (редактирование и удаление)
+    Route::get('/admin/manage-item', [AdminController::class, 'items'])->name('manageItemForm');
+    Route::delete('/admin/manage-item/{componentTitle}/{componentId}', [AdminController::class, 'destroy'])->name('deleteItem');
+    Route::get('/admin/manage-item/{componentTitle}/{componentId}/edit', [AdminController::class, 'edit'])->name('editItemForm');
+    Route::put('/admin/manage-item/{componentTitle}/{componentId}', [AdminController::class, 'update'])->name('updateItemForm');
+    Route::get('/admin/create-item', [AdminController::class, 'category'])->name('categoryOfCreateItemForm');
+    Route::post('/admin/create-item/{componentTitle}', [AdminController::class, 'store'])->name('storeItemForm');
+    Route::get('/admin/create-item/{componentTitle}', [AdminController::class, 'create'])->name('createItemForm');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -46,8 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     // Каталог
-    Route::get('/{componentTitle}', [CatalogController::class, 'index'])->name('catalog');
+    Route::get('/catalog/{componentTitle}', [CatalogController::class, 'index'])->name('catalog');
 
     // Конкретный товар
-    Route::get('/{componentTitle}/{componentId}', [CatalogController::class, 'show'])->name('component');
+    Route::get('/catalog/{componentTitle}/{componentId}', [CatalogController::class, 'show'])->name('component');
 });

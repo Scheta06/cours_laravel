@@ -15,7 +15,7 @@
                         <label for="login-email">Текущий пароль</label>
                         <div class="input-with-icon">
                             <i class="fas fa-envelope"></i>
-                            <input name="email" type="email" id="login-email" placeholder="Ваш текущий пароль" required>
+                            <input name="current_password" type="password" placeholder="Ваш текущий пароль" required>
                         </div>
                     </div>
 
@@ -23,7 +23,7 @@
                         <label for="login-password">Новый пароль</label>
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
-                            <input name="password" type="password" id="login-password" placeholder="Ваш новый пароль" required>
+                            <input name="new_password" type="password" placeholder="Ваш новый пароль" required>
                         </div>
                     </div>
 
@@ -31,7 +31,7 @@
                         <label for="login-password">Повтор нового пароля</label>
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
-                            <input name="password" type="password" id="login-password" placeholder="Ваш новый пароль" required>
+                            <input name="password" type="password" placeholder="Ваш новый пароль" required>
                         </div>
                     </div>
 

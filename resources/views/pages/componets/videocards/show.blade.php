@@ -56,7 +56,7 @@
                         <span class="spec-value">{{ $data->title }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Максимальная частота</span>
+                        <span class="spec-name">Максимальная частота (МГц)</span>
                         <span class="spec-value">{{ $data->max_frequency }}</span>
                     </div>
                     <div class="spec-row">
@@ -64,8 +64,12 @@
                         <span class="spec-value">{{ $data->memoryCapacity->title }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Тип памяти </span>
+                        <span class="spec-name">Тип памяти</span>
                         <span class="spec-value">{{ $data->memoryType->title }}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-name">Тепловыделение (Вт)</span>
+                        <span class="spec-value">{{ $data->tdp }}</span>
                     </div>
             </div>
 

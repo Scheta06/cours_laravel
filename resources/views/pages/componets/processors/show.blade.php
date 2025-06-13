@@ -60,12 +60,16 @@
                         <span class="spec-value">{{ $data->count_of_cores }}/{{ $data->count_of_streams }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Базовая частота</span>
+                        <span class="spec-name">Базовая частота (ГГц)</span>
                         <span class="spec-value">{{ $data->base_frequency }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Макс. частота</span>
+                        <span class="spec-name">Макс. частота (ГГц)</span>
                         <span class="spec-value">{{ $data->max_frequency }}</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-name">Тепловыделение (Вт)</span>
+                        <span class="spec-value">{{ $data->tdp }}</span>
                     </div>
             </div>
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('max_frequency');
+            $table->integer('tdp');
 
             $table->foreignId('vendor_id')
                 ->references('id')

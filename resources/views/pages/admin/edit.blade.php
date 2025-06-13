@@ -57,28 +57,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @dd($chipset)
                         <!-- Процессор 1 -->
                         @foreach ($data as $key => $value)
                             @foreach ($value as $item)
                                 <tr data-category="cpu">
                                     <td>{{ $item->id }}</td>
                                     <td>
-                                        {{ $item->vendor->title }}
-                                        {{ $item->chipset }}
-                                        {{ $item->title }}
+                                        <a
+                                            href="{{ route('component', ['componentTitle' => $item->category->type, 'componentId' => $item->id]) }}">
+                                            {{ $item->vendor->title }}
+                                            @if ($item->category_id === 2)
+                                                {{ $item->chipset->title }}
+                                            @endif
+
+                                            {{ $item->title }}
+                                        </a>
                                     </td>
                                     <td>
                                         <span class="category-badge cpu">
-                                            <i class="fas fa-microchip"></i> {{ $item->category->title }}
+                                            {{ $item->category->title }}
                                         </span>
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="admin-edit-product.html?id=1001" class="btn btn-sm btn-outline">
+                                            <a href="{{ route('editItemForm', ['componentId' => $item->id, 'componentTitle' => $item->category->type]) }}"
+                                                class="btn btn-sm btn-outline">
                                                 <i class="fas fa-edit"></i> Изменить
                                             </a>
-                                            <form action="{{ route('deleteItem', ['componentTitle' => $item->category->type, 'componentId' => $item->id,]) }}" method="POST">
+                                            <form
+                                                action="{{ route('deleteItem', ['componentTitle' => $item->category->type, 'componentId' => $item->id]) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-sm btn-danger" type="submit" data-id="1001">
