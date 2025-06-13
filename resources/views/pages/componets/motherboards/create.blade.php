@@ -98,6 +98,8 @@
                                 </select>
                             </div>
 
+                            <input type="hidden" value="2" name="category_id">
+
                         </div>
                     </div>
 

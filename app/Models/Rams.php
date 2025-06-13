@@ -11,6 +11,7 @@ class Rams extends Model
         'description',
         'vendor_id',
         'count_of_modules',
+        'category_id',
         'memory_capacity_id',
         'memory_type_id',
     ];
@@ -29,5 +30,9 @@ class Rams extends Model
 
     public function memoryType() {
         return $this->belongsTo(MemoryType::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -19,7 +19,9 @@
             </h1>
 
             <div class="admin-form-container">
-                <form class="product-form" action="">
+                <form class="product-form" action="{{ route('storeItemForm', ['componentTitle' => $componentTitle]) }}"
+                    method="POST">
+                    @csrf
                     <!-- Основная информация -->
                     <div class="form-section">
                         <h2 class="section-title">
@@ -29,8 +31,8 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="product-name">Название*</label>
-                                <input type="text" id="product-name" name="title"
-                                    placeholder="Например, A500DN" required>
+                                <input type="text" id="product-name" name="title" placeholder="Например, A500DN"
+                                    required>
                             </div>
 
                             <div class="form-group full-width">
@@ -56,9 +58,9 @@
                                 </select>
                             </div>
 
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="cpu-cores">Форм-фактор*</label>
-                                <select name="vendor_id" id="">
+                                <select name="form_id" id="">
                                     <option value="">Выберите производителя</option>
                                     @foreach ($data[0]['form'] as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -66,6 +68,7 @@
                                 </select>
                             </div>
 
+                            <input type="hidden" value="8" name="category_id">
                         </div>
                     </div>
 
@@ -76,7 +79,7 @@
                             <i class="fas fa-times"></i> Отменить
                         </a>
                         <button type="submit" class="btn btn-success">
-                            <i class="fas fa-save"></i> Сохранить кулер
+                            <i class="fas fa-save"></i> Сохранить
                         </button>
 
                     </div>

@@ -10,6 +10,7 @@ class Cooler extends Model
         'title',
         'description',
         'power',
+        'category_id',
         'vendor_id',
     ];
 
@@ -19,5 +20,9 @@ class Cooler extends Model
 
     public function vendor() {
         return $this->belongsTo(Vendor::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

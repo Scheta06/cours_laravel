@@ -73,6 +73,7 @@
                                 </select>
                             </div>
 
+                            <input type="hidden" value="7" name="category_id">
                         </div>
                     </div>
 

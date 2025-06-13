@@ -10,6 +10,7 @@ class Videocard extends Model
         'title',
         'description',
         'max_frequency',
+        'category_id',
         'vendor_id',
         'memory_capacity_id',
         'memory_type_id',
@@ -29,5 +30,9 @@ class Videocard extends Model
 
     public function memoryType() {
         return $this->belongsTo(MemoryType::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

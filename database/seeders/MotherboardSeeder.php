@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Motherboard;
@@ -21,6 +22,7 @@ class MotherboardSeeder extends Seeder
                 'chipset_id'     => 2,
                 'memory_type_id' => 1,
                 'form_id'        => 1,
+                'category_id' => 2,
             ],
             [
                 'title'          => 'gaming plus wifi',
@@ -31,6 +33,7 @@ class MotherboardSeeder extends Seeder
                 'chipset_id'     => 5,
                 'memory_type_id' => 1,
                 'form_id'        => 1,
+                'category_id' => 2,
             ],
         ];
 

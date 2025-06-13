@@ -31,6 +31,11 @@ return new class extends Migration
                 ->on('vendors')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

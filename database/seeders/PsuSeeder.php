@@ -19,6 +19,7 @@ class PsuSeeder extends Seeder
                 'power'       => 500,
                 'vendor_id'   => 3,
                 'form_id'     => 4,
+                'category_id' => 7,
             ],
         ];
 

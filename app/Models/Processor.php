@@ -14,6 +14,7 @@ class Processor extends Model
         'base_frequency',
         'max_frequency',
         'tdp',
+        'category_id',
         'vendor_id',
         'socket_id',
     ];
@@ -28,5 +29,9 @@ class Processor extends Model
 
     public function socket() {
         return $this->belongsTo(Socket::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

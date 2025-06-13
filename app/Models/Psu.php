@@ -10,6 +10,7 @@ class Psu extends Model
         'description',
         'power',
         'vendor_id',
+        'category_id',
         'form_id',
     ];
 
@@ -26,5 +27,9 @@ class Psu extends Model
     public function form()
     {
         return $this->belongsTo(Form::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

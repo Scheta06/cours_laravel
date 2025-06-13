@@ -10,6 +10,7 @@ class Chassis extends Model
         'title',
         'description',
         'vendor_id',
+        'category_id',
         'form_id',
     ];
 
@@ -23,5 +24,9 @@ class Chassis extends Model
 
     public function form() {
         return $this->belongsTo(Form::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -37,7 +37,8 @@
 
                             <div class="form-group full-width">
                                 <label for="product-description">Описание*</label>
-                                <textarea id="product-description" rows="4" name="description" placeholder="Описание оперативной памяти..." required></textarea>
+                                <textarea id="product-description" rows="4" name="description" placeholder="Описание оперативной памяти..."
+                                    required></textarea>
                             </div>
                         </div>
                     </div>
@@ -83,6 +84,7 @@
                                 </select>
                             </div>
 
+                            <input type="hidden" value="5" name="category_id">
                         </div>
                     </div>
 

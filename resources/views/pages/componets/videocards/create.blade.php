@@ -83,6 +83,7 @@
                                 </select>
                             </div>
 
+                            <input type="hidden" value="6" name="category_id">
                         </div>
                     </div>
 

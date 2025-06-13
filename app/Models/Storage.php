@@ -11,6 +11,7 @@ class Storage extends Model
         'description',
         'read_speed',
         'record_speed',
+        'category_id',
         'vendor_id',
         'memory_capacity_id',
     ];
@@ -25,5 +26,9 @@ class Storage extends Model
 
     public function memoryCapacity() {
         return $this->belongsTo(MemoryCapacity::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

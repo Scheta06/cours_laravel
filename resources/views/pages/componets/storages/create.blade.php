@@ -31,8 +31,8 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="product-name">Название*</label>
-                                <input type="text" id="product-name" name="title"
-                                    placeholder="Например, MP33" required>
+                                <input type="text" id="product-name" name="title" placeholder="Например, MP33"
+                                    required>
                             </div>
 
                             <div class="form-group full-width">
@@ -79,6 +79,7 @@
                                 </select>
                             </div>
 
+                            <input type="hidden" value="4" name="category_id">
                         </div>
                     </div>
 

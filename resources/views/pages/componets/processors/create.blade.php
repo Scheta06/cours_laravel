@@ -95,6 +95,8 @@
                                 <input type="number" id="cpu-tdp" min="10" name="tdp" max="300"
                                     placeholder="65">
                             </div>
+
+                            <input type="hidden" value="1" name="category_id">
                         </div>
                     </div>
 

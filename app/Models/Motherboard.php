@@ -14,6 +14,7 @@ class Motherboard extends Model
         'chipset_id',
         'memory_type_id',
         'form_id',
+        'category_id',
     ];
 
     public function configuration() {
@@ -38,5 +39,9 @@ class Motherboard extends Model
 
     public function form() {
         return $this->belongsTo(Form::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Chassis;
 use App\Models\Chipset;
 use App\Models\Cooler;
@@ -38,7 +39,7 @@ class AdminController extends Controller
         ];
 
         $productCount = 0;
-        $userCount    = User::all()->count();
+        $userCount = User::all()->count();
 
         foreach ($ArrayOfModels as $item) {
             $productCount += $item::count();
@@ -46,52 +47,52 @@ class AdminController extends Controller
 
         return view('pages.admin.index', [
             'productCount' => $productCount,
-            'userCount'    => $userCount,
+            'userCount' => $userCount,
         ]);
     }
 
     public function category()
     {
         $categoryInfo = [
-            'processors'   => [
-                'title'    => 'Процессор',
+            'processors' => [
+                'title' => 'Процессор',
                 'subtitle' => 'Центральные процессоры (CPU)',
-                'icon'     => 'fas fa-microchip',
+                'icon' => 'fas fa-microchip',
             ],
             'motherboards' => [
-                'title'    => 'Материнская плата',
+                'title' => 'Материнская плата',
                 'subtitle' => 'Системные платы (MB)',
-                'icon'     => 'fas fa-project-diagram',
+                'icon' => 'fas fa-project-diagram',
             ],
-            'coolers'      => [
-                'title'    => 'Охлаждение',
+            'coolers' => [
+                'title' => 'Охлаждение',
                 'subtitle' => 'Кулеры и СЖО',
-                'icon'     => 'fas fa-fan',
+                'icon' => 'fas fa-fan',
             ],
-            'rams'         => [
-                'title'    => 'Оперативная память',
+            'rams' => [
+                'title' => 'Оперативная память',
                 'subtitle' => 'Модули RAM',
-                'icon'     => 'fas fa-memory',
+                'icon' => 'fas fa-memory',
             ],
-            'storages'     => [
-                'title'    => 'Накопитель',
+            'storages' => [
+                'title' => 'Накопитель',
                 'subtitle' => 'SSD и HDD',
-                'icon'     => 'fas fa-hdd',
+                'icon' => 'fas fa-hdd',
             ],
-            'videocards'   => [
-                'title'    => 'Видеокарта',
+            'videocards' => [
+                'title' => 'Видеокарта',
                 'subtitle' => 'Графические процессоры (GPU)',
-                'icon'     => 'fas fa-gamepad',
+                'icon' => 'fas fa-gamepad',
             ],
-            'psus'         => [
-                'title'    => 'Блок питания',
+            'psus' => [
+                'title' => 'Блок питания',
                 'subtitle' => 'Источники питания (PSU)',
-                'icon'     => 'fas fa-bolt',
+                'icon' => 'fas fa-bolt',
             ],
-            'chassis'      => [
-                'title'    => 'Корпус',
+            'chassis' => [
+                'title' => 'Корпус',
                 'subtitle' => 'Компьютерные корпуса',
-                'icon'     => 'fas fa-desktop',
+                'icon' => 'fas fa-desktop',
             ],
         ];
         return view('pages.admin.create', [
@@ -99,8 +100,27 @@ class AdminController extends Controller
         ]);
     }
 
-    public function items() {
-        return view('pages.admin.edit');
+    public function items()
+    {
+        $category = Category::all();
+
+        $chipset = Chipset::all();
+        $data = [
+            $processors = Processor::with(['category'])->get(),
+            $motherboards = Motherboard::with(['category', 'chipset'])->get(),
+            $coolers = Cooler::with(['category'])->get(),
+            $storages = Storage::with(['category'])->get(),
+            $rams = Rams::with(['category'])->get(),
+            $videocards = Videocard::with(['category'])->get(),
+            $psus = Psu::with(['category'])->get(),
+            $chassis = Chassis::with(['category'])->get(),
+        ];
+
+        return view('pages.admin.edit', [
+            'data' => $data,
+            'category' => $category,
+            'chipset' => $chipset
+        ]);
     }
 
     /**
@@ -108,12 +128,12 @@ class AdminController extends Controller
      */
     public function create($componentTitle)
     {
-        $data           = [];
-        $vendor         = Vendor::all();
-        $socket         = Socket::all();
-        $form           = Form::all();
-        $chipset        = Chipset::all();
-        $memoryType     = MemoryType::all();
+        $data = [];
+        $vendor = Vendor::all();
+        $socket = Socket::all();
+        $form = Form::all();
+        $chipset = Chipset::all();
+        $memoryType = MemoryType::all();
         $memoryCapacity = MemoryCapacity::all();
         switch ($componentTitle) {
             case 'processors':
@@ -124,10 +144,10 @@ class AdminController extends Controller
                 break;
             case 'motherboards':
                 array_push($data, [
-                    'form'       => $form->where('type', 'mb'),
-                    'vendor'     => $vendor->where('type', '!=', 'processor'),
-                    'chipset'    => $chipset,
-                    'socket'     => $socket,
+                    'form' => $form->where('type', 'mb'),
+                    'vendor' => $vendor->where('type', '!=', 'processor'),
+                    'chipset' => $chipset,
+                    'socket' => $socket,
                     'memoryType' => $memoryType,
                 ]);
                 break;
@@ -138,39 +158,39 @@ class AdminController extends Controller
                 break;
             case 'rams':
                 array_push($data, [
-                    'vendor'         => $vendor->where('type', '!=', 'processor'),
+                    'vendor' => $vendor->where('type', '!=', 'processor'),
                     'memoryCapacity' => $memoryCapacity,
-                    'memoryType'     => $memoryType,
+                    'memoryType' => $memoryType,
                 ]);
                 break;
             case 'storages':
                 array_push($data, [
-                    'vendor'         => $vendor->where('type', '!=', 'processor'),
+                    'vendor' => $vendor->where('type', '!=', 'processor'),
                     'memoryCapacity' => $memoryCapacity,
                 ]);
                 break;
             case 'videocards':
                 array_push($data, [
-                    'vendor'         => $vendor->where('type', '!=', 'processor'),
+                    'vendor' => $vendor->where('type', '!=', 'processor'),
                     'memoryCapacity' => $memoryCapacity,
-                    'memoryType'     => $memoryType,
+                    'memoryType' => $memoryType,
                 ]);
                 break;
             case 'psus':
                 array_push($data, [
                     'vendor' => $vendor->where('type', '!=', 'processor'),
-                    'form'   => $form->where('type', 'psu'),
+                    'form' => $form->where('type', 'psu'),
                 ]);
                 break;
             case 'chassis':
                 array_push($data, [
                     'vendor' => $vendor->where('type', '!=', 'processor'),
-                    'form'   => $form->where('type', 'case'),
+                    'form' => $form->where('type', 'case'),
                 ]);
                 break;
         }
         return view('pages.componets.' . $componentTitle . '.create', [
-            'data'           => $data,
+            'data' => $data,
             'componentTitle' => $componentTitle,
         ]);
     }
@@ -230,9 +250,9 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+
     }
 
     /**
@@ -246,8 +266,44 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($componentTitle, $componentId)
     {
-        //
+        $data = null;
+        switch ($componentTitle) {
+            case 'processors':
+                $data = Processor::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'motherboards':
+                $data = Motherboard::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'coolers':
+                $data = Cooler::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'storages':
+                $data = Storage::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'rams':
+                $data = Rams::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'videocards':
+                $data = Videocard::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'psus':
+                $data = Psu::findOrFail($componentId);
+                $data->delete();
+                break;
+            case 'chassis':
+                $data = Chassis::findOrFail($componentId);
+                $data->delete();
+                break;
+        }
+
+        return redirect()->route('manageItemForm')->with('success', 'Товар удален');
     }
 }

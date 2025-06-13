@@ -23,6 +23,7 @@ class ProcessorSeeder extends Seeder
                 'tdp'              => 65,
                 'vendor_id'        => 1,
                 'socket_id'        => 1,
+                'category_id' => 1,
             ],
             [
                 'title'            => 'Core i5-12400F',
@@ -35,6 +36,7 @@ class ProcessorSeeder extends Seeder
                 'tdp'              => 117,
                 'vendor_id'        => 2,
                 'socket_id'        => 4,
+                'category_id' => 1,
             ],
         ];
 

@@ -12,6 +12,8 @@
             <div class="breadcrumbs">
                 <a href="{{ route('index') }}">Главная</a>
                 <i class="fas fa-chevron-right"></i>
+                <a href="{{ route('profile') }}">Профиль</a>
+                <i class="fas fa-chevron-right"></i>
                 <a href="{{ route('adminPanelForm') }}">Админ-панель</a>
                 <i class="fas fa-chevron-right"></i>
                 <span>Создать товар</span>
