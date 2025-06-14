@@ -28,9 +28,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/manage-item/{componentTitle}/{componentId}', [AdminController::class, 'destroy'])->name('deleteItem');
     Route::get('/admin/manage-item/{componentTitle}/{componentId}/edit', [AdminController::class, 'edit'])->name('editItemForm');
     Route::put('/admin/manage-item/{componentTitle}/{componentId}', [AdminController::class, 'update'])->name('updateItemForm');
+    // Создание товара
     Route::get('/admin/create-item', [AdminController::class, 'category'])->name('categoryOfCreateItemForm');
-    Route::post('/admin/create-item/{componentTitle}', [AdminController::class, 'store'])->name('storeItemForm');
     Route::get('/admin/create-item/{componentTitle}', [AdminController::class, 'create'])->name('createItemForm');
+    Route::post('/admin/create-item/{componentTitle}', [AdminController::class, 'store'])->name('storeItemForm');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -53,4 +54,5 @@ Route::middleware(['auth'])->group(function () {
 
     // Конкретный товар
     Route::get('/catalog/{componentTitle}/{componentId}', [CatalogController::class, 'show'])->name('component');
+    Route::post('/catalog/{componentTitle}/{componentId}', [ConfigurationController::class, 'store'])->name('storeComponent');
 });

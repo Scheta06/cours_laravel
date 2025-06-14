@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -19,6 +20,8 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Videocard;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Termwind\Components\Raw;
 
 class AdminController extends Controller
 {
@@ -239,10 +242,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
-    {
-
-    }
+    public function show() {}
 
     /**
      * Show the form for editing the specified resource.
@@ -273,22 +273,59 @@ class AdminController extends Controller
                 ];
                 break;
             case 'coolers':
-                $data = Cooler::findOrFail($componentId);
+                $data = [
+                    'componentInfo' => Cooler::findOrFail($componentId),
+                    'relations'     => [
+                        'vendor'     => Vendor::where('type', '!=', 'processor')->get(),
+                    ],
+                ];
                 break;
             case 'storages':
-                $data = Storage::findOrFail($componentId);
+                $data = [
+                    'componentInfo' => Storage::findOrFail($componentId),
+                    'relations'     => [
+                        'vendor'     => Vendor::where('type', '!=', 'processor')->get(),
+                        'memoryCapacity'     => MemoryCapacity::all(),
+                    ],
+                ];
                 break;
             case 'rams':
-                $data = Rams::findOrFail($componentId);
+                $data = [
+                    'componentInfo' => Rams::findOrFail($componentId),
+                    'relations'     => [
+                        'vendor'     => Vendor::where('type', '!=', 'processor')->get(),
+                        'memoryCapacity'     => MemoryCapacity::all(),
+                        'memoryType'     => MemoryType::all(),
+                    ],
+                ];
                 break;
             case 'videocards':
-                $data = Videocard::findOrFail($componentId);
+                $data = [
+                    'componentInfo' => Videocard::findOrFail($componentId),
+                    'relations'     => [
+                        'vendor'     => Vendor::all(),
+                        'memoryCapacity'     => MemoryCapacity::all(),
+                        'memoryType'     => MemoryType::all(),
+                    ],
+                ];
                 break;
             case 'psus':
-                $data = Psu::findOrFail($componentId);
+                $data = [
+                    'componentInfo' => Psu::findOrFail($componentId),
+                    'relations'     => [
+                        'vendor'     => Vendor::where('type', '!=', 'processor')->get(),
+                        'form'     => Form::all(),
+                    ],
+                ];
                 break;
             case 'chassis':
-                $data = Chassis::findOrFail($componentId);
+                $data = [
+                    'componentInfo' => Chassis::findOrFail($componentId),
+                    'relations'     => [
+                        'vendor'     => Vendor::where('type', '!=', 'processor')->get(),
+                        'form'     => Form::all(),
+                    ],
+                ];
                 break;
         }
         return view('pages.componets.' . $componentTitle . '.edit', [
@@ -311,6 +348,36 @@ class AdminController extends Controller
                 break;
             case 'motherboards':
                 $component = Motherboard::findOrFail($componentId);
+                $validated = $request->all();
+                $component->update($validated);
+                break;
+            case 'coolers':
+                $component = Cooler::findOrFail($componentId);
+                $validated = $request->all();
+                $component->update($validated);
+                break;
+            case 'storages':
+                $component = Storage::findOrFail($componentId);
+                $validated = $request->all();
+                $component->update($validated);
+                break;
+            case 'rams':
+                $component = Rams::findOrFail($componentId);
+                $validated = $request->all();
+                $component->update($validated);
+                break;
+            case 'videocards':
+                $component = Videocard::findOrFail($componentId);
+                $validated = $request->all();
+                $component->update($validated);
+                break;
+            case 'psus':
+                $component = Psu::findOrFail($componentId);
+                $validated = $request->all();
+                $component->update($validated);
+                break;
+            case 'chassis':
+                $component = Chassis::findOrFail($componentId);
                 $validated = $request->all();
                 $component->update($validated);
                 break;

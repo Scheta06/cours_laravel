@@ -4,8 +4,6 @@
     <main class="main">
         <section class="build-creator">
             <div class="container">
-
-
                 <form class="build-form" action="{{ route('configuration') }}">
                     <h1 class="section-title" style="text-align: center">Создать новую сборку</h1>
                     @method('POST')

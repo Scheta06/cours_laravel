@@ -16,13 +16,15 @@
             <div class="product-card detailed">
                 <div class="product-gallery">
                     <div class="main-image">
-                        <img src="https://via.placeholder.com/600x600" alt="{{ $data->vendor->title }} {{ $data->title }}" loading="lazy">
+                        <img src="https://via.placeholder.com/600x600" alt="{{ $data->vendor->title }} {{ $data->title }}"
+                            loading="lazy">
                     </div>
                 </div>
 
                 <div class="product-details">
                     <div class="product-header">
-                        <h1 class="product-title">{{ $data->vendor->title }} {{ $data->chipset->title }} {{ $data->title }}</h1>
+                        <h1 class="product-title">{{ $data->vendor->title }} {{ $data->chipset->title }} {{ $data->title }}
+                        </h1>
                     </div>
 
                     <div class="product-description">
@@ -30,10 +32,17 @@
                     </div>
 
                     <div class="product-actions">
-                        <a href="#" class="btn btn-primary btn-lg">
-                            <i class="fas fa-shopping-cart"></i> Добавить в конфигурацию
-                        </a>
-                        <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}" class="btn btn-outline btn-lg">
+                        <form
+                            action="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $data->id]) }}"
+                            method="POST" class="">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-shopping-cart"></i> Добавить в конфигурацию
+                            </button>
+                        </form>
+                        <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}"
+                            class="btn btn-outline btn-lg">
                             <i class="fas fa-heart"></i> Вернуться к каталогу
                         </a>
                     </div>
@@ -71,16 +80,16 @@
                         <span class="spec-name">Форм фактор</span>
                         <span class="spec-value">{{ $data->form->title }}</span>
                     </div>
-            </div>
-
-            <!-- Описание -->
-            <div class="product-full-description">
-                <h2 class="section-title">
-                    <i class="fas fa-align-left"></i> Описание
-                </h2>
-                <div class="description-content">
-                    <p>{{ $data->description }}
-                    </p>
                 </div>
-            </div>
-    </div @endsection
+
+                <!-- Описание -->
+                <div class="product-full-description">
+                    <h2 class="section-title">
+                        <i class="fas fa-align-left"></i> Описание
+                    </h2>
+                    <div class="description-content">
+                        <p>{{ $data->description }}
+                        </p>
+                    </div>
+                </div>
+        </div @endsection

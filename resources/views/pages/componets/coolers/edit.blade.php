@@ -17,7 +17,7 @@
             </div>
 
             <h1 class="page-title">
-                <i class="fas fa-microchip"></i> Редактирование данных для накопителя
+                <i class="fas fa-microchip"></i> Редактирование данных для кулеры
                 {{ $data['componentInfo']->vendor->title }} {{ $data['componentInfo']->title }}
             </h1>
 
@@ -53,15 +53,9 @@
                         </h2>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="cpu-cores">Скорость чтения (МБ/сек)*</label>
-                                <input type="number" name="read_speed" value="{{ $data['componentInfo']->read_speed }}" id="cpu-cores" min="1" max="1000000"
-                                    placeholder="500" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cpu-cores">Скорость записи (МБ/сек)*</label>
-                                <input type="number" name="record_speed" value="{{ $data['componentInfo']->record_speed }}" id="cpu-cores" min="1" max="1000000"
-                                    placeholder="600" required>
+                                <label for="cpu-cores">Мощность (Вт)*</label>
+                                <input type="number" name="power" value="{{ $data['componentInfo']->power }}"
+                                    id="cpu-cores" min="1" max="1000" placeholder="65" required>
                             </div>
 
                             <div class="form-group">
@@ -76,7 +70,7 @@
                                 </select>
                             </div>
 
-                            <input type="hidden" value="4" name="category_id">
+                            <input type="hidden" value="3" name="category_id">
                         </div>
                     </div>
 

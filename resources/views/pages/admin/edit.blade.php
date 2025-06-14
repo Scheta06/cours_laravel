@@ -104,18 +104,6 @@
                     </tbody>
                 </table>
 
-                <!-- Пагинация -->
-                <div class="pagination">
-                    <button class="btn btn-outline" disabled>
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-outline active">1</button>
-                    <button class="btn btn-outline">2</button>
-                    <button class="btn btn-outline">3</button>
-                    <button class="btn btn-outline">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </main>

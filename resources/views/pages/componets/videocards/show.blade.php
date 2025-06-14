@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="product-actions">
-                        <a href="#" class="btn btn-primary btn-lg">
+                        <a href="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $data->id]) }}" class="btn btn-primary btn-lg">
                             <i class="fas fa-shopping-cart"></i> Добавить в конфигурацию
                         </a>
                         <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}" class="btn btn-outline btn-lg">

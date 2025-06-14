@@ -15,7 +15,7 @@
                         <label for="login-email">Email</label>
                         <div class="input-with-icon">
                             <i class="fas fa-envelope"></i>
-                            <input name="email" type="email" id="login-email" placeholder="Ваш email" required>
+                            <input name="email" type="email" id="login-email" class="pd40" placeholder="Ваш email" required>
                         </div>
                     </div>
 
@@ -23,7 +23,7 @@
                         <label for="login-password">Пароль</label>
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
-                            <input name="password" type="password" id="login-password" placeholder="Ваш пароль" required>
+                            <input name="password" type="password" id="login-password" class="pd40" placeholder="Ваш пароль" required>
                         </div>
                     </div>
 

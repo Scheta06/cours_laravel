@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Configuration;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
@@ -53,8 +56,11 @@ class ConfigurationController extends Controller
                 'i' => 'fas fa-server',
             ],
         ];
+        $configuration = session('configuration', []);
+
         return view('index', [
             'componentList' => $componentList,
+            'configuration' => $configuration
         ]);
     }
 
@@ -69,9 +75,15 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($componentTitle, $componentId)
     {
-        //
+        $configuration = session('configuration', []);
+
+        $configuration[$componentTitle] = $componentId;
+
+        session(['configuration' => $configuration]);
+
+        return redirect()->route('index')->with('success', 'Компонент успешно добавлен');
     }
 
     /**
@@ -93,9 +105,46 @@ class ConfigurationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $componentTitle, $componentId)
     {
-        //
+        $build = session('configuration', []);
+
+        $requiredComponents = [
+            'processors',
+            'motherboards',
+            'coolers',
+            'rams',
+            'storages',
+            'videocards',
+            'psus',
+            'chassis',
+        ];
+
+        $missing = array_diff($requiredComponents, array_keys($build));
+
+        if (!empty($missing)) {
+            return redirect()->back()->withErrors([
+                'message' => 'Выберите недостающие компоненты: ' . implode(', ', $missing),
+            ]);
+        }
+
+        Configuration::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'user_id' => Auth::user()->id,
+            'processor_id' => $build['processors'],
+            'motherboard_id' => $build['motherboards'],
+            'cooler_id' => $build['coolers'],
+            'ram_id' => $build['rams'],
+            'storage_id' => $build['storages'],
+            'videocard_id' => $build['videocards'],
+            'psu_id' => $build['psus'],
+            'chassis_id' => $build['chassis'],
+        ]);
+
+        session()->forget('configuration');
+
+        return redirect()->route('index')->with('success', 'Сборка сохранена!');
     }
 
     /**
