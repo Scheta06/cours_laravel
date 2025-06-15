@@ -31,9 +31,14 @@
 
                                 <div class="product-info">
 
-                                    <h3 class="product-title">{{ $item->vendor->title }} {{ $item->chipset->title }} {{ ($item->title) }}</h3>
+                                    <h3 class="product-title">{{ $item->vendor->title }} {{ $item->chipset->title }}
+                                        {{ $item->title }}</h3>
 
                                     <div class="product-specs">
+                                        <div class="spec-item">
+                                            <i class="fas fa-microchip"></i>
+                                            <span>{{ $item->socket->title }}</span>
+                                        </div>
                                         <div class="spec-item">
                                             <i class="fas fa-microchip"></i>
                                             <span>{{ $item->chipset->title }}</span>
@@ -45,7 +50,8 @@
                                     </div>
 
                                     <div class="product-actions">
-                                        <a href="{{ route('component', ['componentTitle' => $componentTitle, 'componentId' => $item->id]) }}" class="btn btn-outline btn-sm">
+                                        <a href="{{ route('component', ['componentTitle' => $componentTitle, 'componentId' => $item->id]) }}"
+                                            class="btn btn-outline btn-sm">
                                             <i class="fas fa-info-circle"></i> Подробнее
                                         </a>
                                         <form action="">

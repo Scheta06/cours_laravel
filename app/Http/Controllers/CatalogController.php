@@ -51,10 +51,10 @@ class CatalogController extends Controller
                 break;
             case 'chassis':
                 $title = 'Корпусы';
-                $data  = Psu::with(['vendor'])->get();
+                $data  = Chassis::with(['vendor'])->get();
                 break;
         }
-        return view('pages.componets.' . $componentTitle . '.index', [
+        return view('pages.components.' . $componentTitle . '.index', [
             'title' => $title,
             'data'  => $data,
             'componentTitle' => $componentTitle
@@ -110,7 +110,7 @@ class CatalogController extends Controller
                 $data = Chassis::findOrFail($componentId)->load(['vendor', 'form']);
                 break;
         }
-        return view('pages.componets.' . $componentTitle . '.show', [
+        return view('pages.components.' . $componentTitle . '.show', [
             'data' => $data,
             'componentTitle' => $componentTitle
         ]);

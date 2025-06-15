@@ -22,11 +22,11 @@ class FormSeeder extends Seeder
                 'type' => $mb,
             ],
             [
-                'title' => 'micro-ATX',
+                'title' => 'Micro-ATX',
                 'type' => $mb,
             ],
             [
-                'title' => 'mini-ATX',
+                'title' => 'Mini-ATX',
                 'type' => $mb,
             ],
             [
@@ -42,15 +42,15 @@ class FormSeeder extends Seeder
                 'type' => $psu,
             ],
             [
-                'title' => 'full tower',
+                'title' => 'Full-tower',
                 'type' => $case,
             ],
             [
-                'title' => 'mid tower',
+                'title' => 'Mid-tower',
                 'type' => $case,
             ],
             [
-                'title' => 'mini tower',
+                'title' => 'Mini-tower',
                 'type' => $case,
             ],
         ];

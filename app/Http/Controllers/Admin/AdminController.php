@@ -190,7 +190,7 @@ class AdminController extends Controller
                 ]);
                 break;
         }
-        return view('pages.componets.' . $componentTitle . '.create', [
+        return view('pages.components.' . $componentTitle . '.create', [
             'data'           => $data,
             'componentTitle' => $componentTitle,
         ]);
@@ -328,7 +328,7 @@ class AdminController extends Controller
                 ];
                 break;
         }
-        return view('pages.componets.' . $componentTitle . '.edit', [
+        return view('pages.components.' . $componentTitle . '.edit', [
             'data'           => $data,
             'componentTitle' => $componentTitle,
             'componentId'    => $componentId,

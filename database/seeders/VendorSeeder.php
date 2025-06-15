@@ -48,6 +48,10 @@ class VendorSeeder extends Seeder
                 'title' => 'TEAMGROUP',
                 'type'  => '',
             ],
+            [
+                'title' => 'PCCooler',
+                'type'  => '',
+            ],
         ];
 
         foreach ($Array as $item) {

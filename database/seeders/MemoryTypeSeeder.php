@@ -13,19 +13,19 @@ class MemoryTypeSeeder extends Seeder
     {
         $Array = [
             [
-                'title' => 'ddr4',
+                'title' => 'DDR4',
             ],
             [
-                'title' => 'ddr5',
+                'title' => 'DDR5',
             ],
             [
-                'title' => 'gddr6',
+                'title' => 'GDDR6',
             ],
             [
-                'title' => 'gddr6x',
+                'title' => 'GDDR6X',
             ],
             [
-                'title' => 'gddr7x',
+                'title' => 'GDDR7X',
             ],
         ];
 

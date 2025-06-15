@@ -36,6 +36,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/my-configuration', [Configuration::class, 'index'])->name('userConfigrationForm');
+
     // Сохранение конфигурации в мои сборки
     Route::post('/', [ConfigurationController::class, 'store'])->name('configuration');
 

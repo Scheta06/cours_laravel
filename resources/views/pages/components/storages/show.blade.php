@@ -7,7 +7,7 @@
             <div class="breadcrumbs">
                 <a href="{{ route('index') }}">Главная</a>
                 <i class="fas fa-chevron-right"></i>
-                <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}">Видеокарты</a>
+                <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}">Хранилище</a>
                 <i class="fas fa-chevron-right"></i>
                 <span>{{ $data->vendor->title }} {{ $data->title }}</span>
             </div>
@@ -16,7 +16,8 @@
             <div class="product-card detailed">
                 <div class="product-gallery">
                     <div class="main-image">
-                        <img src="https://via.placeholder.com/600x600" alt="{{ $data->vendor->title }} {{ $data->title }}" loading="lazy">
+                        <img src="https://via.placeholder.com/600x600" alt="{{ $data->vendor->title }} {{ $data->title }}"
+                            loading="lazy">
                     </div>
                 </div>
 
@@ -30,10 +31,17 @@
                     </div>
 
                     <div class="product-actions">
-                        <a href="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $data->id]) }}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-shopping-cart"></i> Добавить в конфигурацию
-                        </a>
-                        <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}" class="btn btn-outline btn-lg">
+                        <form
+                            action="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $data->id]) }}"
+                            method="POST" class="full-height full-width">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-primary btn-lg full-height full-width">
+                                <i class="fas fa-shopping-cart"></i> Добавить в конфигурацию
+                            </button>
+                        </form>
+                        <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}"
+                            class="btn btn-outline btn-lg">
                             <i class="fas fa-heart"></i> Вернуться к каталогу
                         </a>
                     </div>
@@ -56,31 +64,27 @@
                         <span class="spec-value">{{ $data->title }}</span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Максимальная частота (МГц)</span>
-                        <span class="spec-value">{{ $data->max_frequency }}</span>
+                        <span class="spec-name">Скорость чтения (МБ/сек)</span>
+                        <span class="spec-value">{{ $data->read_speed }} </span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Вместимость видеопамяти (Гб)</span>
-                        <span class="spec-value">{{ $data->memoryCapacity->title }}</span>
+                        <span class="spec-name">Скорость записи (МБ/сек)</span>
+                        <span class="spec-value">{{ $data->record_speed }} </span>
                     </div>
                     <div class="spec-row">
-                        <span class="spec-name">Тип памяти</span>
-                        <span class="spec-value">{{ $data->memoryType->title }}</span>
+                        <span class="spec-name">Вместимость хранилища (Гб)</span>
+                        <span class="spec-value">{{ $data->memoryCapacity->title }} </span>
                     </div>
-                    <div class="spec-row">
-                        <span class="spec-name">Тепловыделение (Вт)</span>
-                        <span class="spec-value">{{ $data->tdp }}</span>
-                    </div>
-            </div>
-
-            <!-- Описание -->
-            <div class="product-full-description">
-                <h2 class="section-title">
-                    <i class="fas fa-align-left"></i> Описание
-                </h2>
-                <div class="description-content">
-                    <p>{{ $data->description }}
-                    </p>
                 </div>
-            </div>
-    </div @endsection
+
+                <!-- Описание -->
+                <div class="product-full-description">
+                    <h2 class="section-title">
+                        <i class="fas fa-align-left"></i> Описание
+                    </h2>
+                    <div class="description-content">
+                        <p>{{ $data->description }}
+                        </p>
+                    </div>
+                </div>
+        </div @endsection
