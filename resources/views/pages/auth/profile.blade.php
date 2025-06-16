@@ -63,19 +63,107 @@
             </div>
 
             <div class="profile-card">
-
                 <h2 class="section-title">
                     <i class="fas fa-tools"></i> Последние сборки
                 </h2>
+
                 @if ($configurationCount === 0)
-                    <!-- Здесь будет список сборок -->
                     <div class="empty-state">
                         <i class="fas fa-tools"></i>
                         <p>У вас пока нет сборок</p>
                         <a href="{{ route('index') }}" class="btn btn-primary">Создать сборку</a>
                     </div>
-                @endif
+                @else
+                    @foreach ($userConfigurations as $key => $value)
+                        <div class="builds-container">
+                            <div class="build-card">
+                                <div class="build-header">
+                                    <h3 class="build-title">{{ $value->title }}</h3>
+                                    <div class="build-actions">
+                                        <a href="#" class="btn btn-outline btn-sm">
+                                            <i class="fas fa-edit"></i> Изменить
+                                        </a>
+                                        <form action="{{ route('deleteConfiguration', ['configurationId' => $value->id]) }}" method="POST" class="build-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline btn-sm">
+                                                <i class="fas fa-trash"></i> Удалить
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <p class="build-description">{{ $value->description }}</p>
+
+                                <div class="components-list">
+                                    <div class="component-item">
+                                        <span class="component-label">Процессор</span>
+                                        <span class="component-value">{{ $value->processor->vendor->title }}
+                                            {{ $value->processor->title }}</span>
+                                    </div>
+
+                                    <div class="component-item">
+                                        <span class="component-label">Материнская плата</span>
+                                        <span class="component-value">{{ $value->motherboard->vendor->title }}
+                                            {{ $value->motherboard->chipset->title }}
+                                            {{ $value->motherboard->title }}</span>
+                                    </div>
+
+                                    <div class="component-item">
+                                        <span class="component-label">Кулер</span>
+                                        <span class="component-value">{{ $value->cooler->vendor->title }}
+                                            {{ $value->cooler->title }}</span>
+                                    </div>
+
+                                    <div class="component-item">
+                                        <span class="component-label">Накопитель</span>
+                                        <span class="component-value">{{ $value->storage->vendor->title }}
+                                            {{ $value->storage->title }}</span>
+                                    </div>
+
+                                    <div class="component-item">
+                                        <span class="component-label">Видеокарта</span>
+                                        <span class="component-value">{{ $value->videocard->vendor->title }}
+                                            {{ $value->videocard->title }}</span>
+                                    </div>
+
+                                    <div class="component-item">
+                                        <span class="component-label">Блок питания</span>
+                                        <span class="component-value">{{ $value->psu->vendor->title }}
+                                            {{ $value->psu->title }}</span>
+                                    </div>
+
+                                    <div class="component-item">
+                                        <span class="component-label">Корпус</span>
+                                        <span class="component-value">{{ $value->chassis->vendor->title }}
+                                            {{ $value->chassis->title }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Блок с ошибками -->
+                                <div class="errors-block">
+                                    <div class="error-title">
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                        Проблемы совместимости
+                                    </div>
+                                    <div class="error-item">
+                                        <i class="fas fa-times-circle error-icon"></i>
+                                        Выбранный кулер Noctua NH-D15 может не поместиться в корпус Lian Li PC-O11 Dynamic
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Блок с ошибками (пример без ошибок) -->
+                            <div class="success-block">
+                                <div class="success-title">
+                                    <i class="fas fa-check-circle success-icon"></i>
+                                    Проблемы совместимости не обнаружены
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
             </div>
+            @endif
+        </div>
         </div>
     </main>
 @endsection

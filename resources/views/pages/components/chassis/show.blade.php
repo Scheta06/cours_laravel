@@ -20,12 +20,10 @@
                             loading="lazy">
                     </div>
                 </div>
-
                 <div class="product-details">
                     <div class="product-header">
                         <h1 class="product-title">{{ $data->vendor->title }} {{ $data->title }}</h1>
                     </div>
-
 
                     <div class="product-actions">
                         <form

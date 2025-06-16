@@ -37,15 +37,15 @@
                                     <div class="product-specs">
                                         <div class="spec-item">
                                             <i class="fas fa-microchip"></i>
-                                            <span>{{ $item->socket->title }}</span>
+                                            <span>Сокет - {{ $item->socket->title }}</span>
                                         </div>
                                         <div class="spec-item">
                                             <i class="fas fa-microchip"></i>
-                                            <span>{{ $item->chipset->title }}</span>
+                                            <span>Чипсет - {{ $item->chipset->title }}</span>
                                         </div>
                                         <div class="spec-item">
                                             <i class="fas fa-tachometer-alt"></i>
-                                            <span>{{ $item->memoryType->title }}</span>
+                                            <span>Тип памяти - {{ $item->memoryType->title }}</span>
                                         </div>
                                     </div>
 
@@ -54,7 +54,11 @@
                                             class="btn btn-outline btn-sm">
                                             <i class="fas fa-info-circle"></i> Подробнее
                                         </a>
-                                        <form action="">
+                                        <form
+                                            action="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $item->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('POST')
                                             @csrf
                                             <button class="btn btn-primary btn-sm add-to-build">
                                                 <i class="fas fa-plus"></i> В сборку

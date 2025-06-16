@@ -106,56 +106,15 @@ class ConfigurationController extends Controller
             $configurationErrors['motherboard_and_ram'] = $errorTitle;
         }
 
-        $componentList = [
-            'processors' => [
-                'title' => 'Процессор',
-                'placeholder' => 'Выбрать процессор',
-                'i' => 'fas fa-microchip',
-                'selectedComponent' => $components['processor']
-            ],
-            'motherboards' => [
-                'title' => 'Материнская плата',
-                'placeholder' => 'Выбрать плату',
-                'i' => 'fas fa-network-wired',
-                'selectedComponent' => $components['motherboard']
-            ],
-            'coolers' => [
-                'title' => 'Кулер',
-                'placeholder' => 'Выбрать кулер',
-                'i' => 'fas fa-fan',
-                'selectedComponent' => $components['cooler']
-            ],
-            'rams' => [
-                'title' => 'Оперативная память',
-                'placeholder' => 'Выбрать оперативную память',
-                'i' => 'fas fa-memory',
-                'selectedComponent' => $components['ram']
-            ],
-            'storages' => [
-                'title' => 'Накопитель',
-                'placeholder' => 'Выбрать накопитель',
-                'i' => 'fas fa-database',
-                'selectedComponent' => $components['storage']
-            ],
-            'videocards' => [
-                'title' => 'Видеокарта',
-                'placeholder' => 'Выбрать видеокарту',
-                'i' => 'fas fa-gamepad',
-                'selectedComponent' => $components['videocard']
-            ],
-            'psus' => [
-                'title' => 'Блок питания',
-                'placeholder' => 'Выбрать блок питания',
-                'i' => 'fas fa-bolt',
-                'selectedComponent' => $components['psu']
-            ],
-            'chassis' => [
-                'title' => 'Корпус',
-                'placeholder' => 'Выбрать корпус',
-                'i' => 'fas fa-server',
-                'selectedComponent' => $components['case']
-            ],
-        ];
+        $componentList = config('constans.componentList');
+
+        foreach ($componentList as $key => &$item) {
+            if ($key !== 'chassis') {
+                $componentKey = preg_replace('/s$/', '', $key);
+            }
+
+            $item['selectedComponent'] = $components[$componentKey] ?? null;
+        }
 
         return view('index', [
             'componentList' => $componentList,
@@ -175,7 +134,7 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($componentTitle, $componentId)
+    public function store(Request $request, $componentTitle, $componentId)
     {
         $configuration = session('configuration', [
             'processors' => null,
@@ -214,10 +173,9 @@ class ConfigurationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $componentTitle, $componentId)
+    public function update(Request $request)
     {
         $build = session('configuration', []);
-
         $requiredComponents = [
             'processors',
             'motherboards',
@@ -241,14 +199,14 @@ class ConfigurationController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'user_id' => Auth::user()->id,
-            'processor_id' => $build['processor_id'],
-            'motherboard_id' => $build['motherboard_id'],
-            'cooler_id' => $build['cooler_id'],
-            'ram_id' => $build['ram_id'],
-            'storage_id' => $build['storage_id'],
-            'videocard_id' => $build['videocard_id'],
-            'psu_id' => $build['psu_id'],
-            'chassis_id' => $build['case_id'],
+            'processor_id' => $build['processors'],
+            'motherboard_id' => $build['motherboards'],
+            'cooler_id' => $build['coolers'],
+            'ram_id' => $build['rams'],
+            'storage_id' => $build['storages'],
+            'videocard_id' => $build['videocards'],
+            'psu_id' => $build['psus'],
+            'chassis_id' => $build['chassis'],
         ]);
 
         session()->forget('configuration');

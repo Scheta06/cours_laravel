@@ -20,19 +20,6 @@
     --header-height: 70px;
 }
 
-[data-theme="dark"] {
-    --primary: #4895ef;
-    --primary-dark: #4361ee;
-    --text: #f8f9fa;
-    --text-light: #adb5bd;
-    --bg: #121212;
-    --bg-secondary: #1e1e1e;
-    --card-bg: #2d2d2d;
-    --border: #3d3d3d;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.3);
-}
-
 /* Базовые стили */
 * {
     margin: 0;

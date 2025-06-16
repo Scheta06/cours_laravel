@@ -4,7 +4,7 @@
     <main class="main">
         <section class="build-creator">
             <div class="container">
-                <form class="build-form" action="{{ route('configuration') }}">
+                <form class="build-form" action="{{ route('configuration') }}" method="POST">
                     <h1 class="section-title" style="text-align: center">Создать новую сборку</h1>
                     @method('POST')
                     @csrf
@@ -19,6 +19,7 @@
                         <textarea id="build-desc" placeholder="Опишите назначение сборки (игры, работа, дизайн)..." rows="3"
                             name="description"></textarea>
                     </div>
+                    {{-- @dd($configuration) --}}
                     <div class="components-selection">
                         <h2>Выберите компоненты</h2>
                         @foreach ($componentList as $key => $value)
@@ -27,7 +28,7 @@
                                     <i class="{{ $value['i'] }}"></i>
                                     <h3>{{ $value['title'] }}</h3>
                                     <span class="status">
-                                        @if (isset($value['selectedComponent']) && $value['selectedComponent'])
+                                        @if (isset($value['selectedComponent']))
                                             @if ($key === 'motherboards')
                                                 {{ $value['selectedComponent']->vendor->title }}
                                                 {{ $value['selectedComponent']->chipset->title }}

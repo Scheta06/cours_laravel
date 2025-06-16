@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use App\Models\Configuration;
 use App\Http\Controllers\Controller;
+use App\Models\Configuration;
+use App\Models\Processor;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -15,9 +16,12 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $configurationCount = Configuration::where(['user_id' => $user->id])->count();
+        $userConfigurations = Configuration::where('user_id', $user->id)->get();
+
         return view('pages.auth.profile', [
             'user' => $user,
-            'configurationCount' => $configurationCount
+            'configurationCount' => $configurationCount,
+            'userConfigurations' => $userConfigurations
         ]);
     }
 
@@ -44,6 +48,7 @@ class ProfileController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      */

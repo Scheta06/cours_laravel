@@ -124,6 +124,10 @@ class AdminController extends Controller
         ]);
     }
 
+    public function findCategory(Request $request) {
+        $query = '';
+    }
+
     /**
      * Show the form for creating a new resource.
      */

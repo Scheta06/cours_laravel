@@ -9,7 +9,7 @@
                 <i class="fas fa-chevron-right"></i>
                 <a href="{{ route('catalog', ['componentTitle' => $componentTitle]) }}">Кулеры</a>
                 <i class="fas fa-chevron-right"></i>
-                <span>{{ $data->vendor->title }} {{ $data->title }}</span>
+                <span>Кулер {{ $data->vendor->title }} {{ $data->title }}</span>
             </div>
 
             <!-- Основная карточка товара -->
@@ -23,13 +23,13 @@
 
                 <div class="product-details">
                     <div class="product-header">
-                        <h1 class="product-title">{{ $data->vendor->title }} {{ $data->title }}</h1>
+                        <h1 class="product-title">Кулер {{ $data->vendor->title }} {{ $data->title }}</h1>
                     </div>
 
                     <div class="product-actions">
                         <form
                             action="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $data->id]) }}"
-                            method="POST" class="full-height full-width">
+                            method="POST">
                             @csrf
                             @method('POST')
                             <button type="submit" class="btn btn-primary btn-lg full-height full-width">

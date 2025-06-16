@@ -33,7 +33,7 @@
                     <div class="product-actions">
                         <form
                             action="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $data->id]) }}"
-                            method="POST" class="full-height full-width">
+                            method="POST">
                             @csrf
                             @method('POST')
                             <button type="submit" class="btn btn-primary btn-lg full-height full-width">

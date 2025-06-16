@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div class="product-info">
-                                    <h3 class="product-title">{{ $item->vendor->title }} {{ ($item->title) }}</h3>
+                                    <h3 class="product-title">{{ $item->vendor->title }} {{ $item->title }}</h3>
 
                                     <div class="product-specs">
                                         <div class="spec-item">
@@ -48,10 +48,15 @@
                                     </div>
 
                                     <div class="product-actions">
-                                        <a href="{{ route('component', ['componentTitle' => $componentTitle, 'componentId' => $item->id]) }}" class="btn btn-outline btn-sm">
+                                        <a href="{{ route('component', ['componentTitle' => $componentTitle, 'componentId' => $item->id]) }}"
+                                            class="btn btn-outline btn-sm">
                                             <i class="fas fa-info-circle"></i> Подробнее
                                         </a>
-                                        <form action="">
+                                        <form
+                                            action="{{ route('storeComponent', ['componentTitle' => $componentTitle, 'componentId' => $item->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('POST')
                                             @csrf
                                             <button class="btn btn-primary btn-sm add-to-build">
                                                 <i class="fas fa-plus"></i> В сборку

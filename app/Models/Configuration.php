@@ -48,7 +48,7 @@ class Configuration extends Model
         return $this->belongsTo(Psu::class);
     }
 
-    public function Chassis() {
+    public function chassis() {
         return $this->belongsTo(Cooler::class);
     }
 }
