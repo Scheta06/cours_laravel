@@ -16,7 +16,7 @@
 
             <div class="catalog-layout">
                 <!-- Боковые фильтры -->
-                @include('partials.catalog.filter')
+                @include('partials.catalog.filter', $vendors)
 
                 <!-- Основной контент каталога -->
                 <div class="catalog-content">

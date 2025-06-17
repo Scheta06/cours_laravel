@@ -31,11 +31,6 @@
                                 <i class="fas fa-user-cog"></i> Админ-панель
                             </a>
                         @endif
-                        <a href="{{ route('changePasswordForm') }}">
-                            <button class="btn btn-outline">
-                                <i class="fas fa-cog"></i> Изменить пароль
-                            </button>
-                        </a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button class="btn btn-outline">
@@ -66,7 +61,6 @@
                 <h2 class="section-title">
                     <i class="fas fa-tools"></i> Последние сборки
                 </h2>
-
                 @if ($configurationCount === 0)
                     <div class="empty-state">
                         <i class="fas fa-tools"></i>
@@ -80,10 +74,8 @@
                                 <div class="build-header">
                                     <h3 class="build-title">{{ $value->title }}</h3>
                                     <div class="build-actions">
-                                        <a href="#" class="btn btn-outline btn-sm">
-                                            <i class="fas fa-edit"></i> Изменить
-                                        </a>
-                                        <form action="{{ route('deleteConfiguration', ['configurationId' => $value->id]) }}" method="POST" class="build-form">
+                                        <form action="{{ route('deleteConfiguration', ['configurationId' => $value->id]) }}"
+                                            method="POST" class="build-form">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-outline btn-sm">
@@ -138,32 +130,12 @@
                                             {{ $value->chassis->title }}</span>
                                     </div>
                                 </div>
-
-                                <!-- Блок с ошибками -->
-                                <div class="errors-block">
-                                    <div class="error-title">
-                                        <i class="fas fa-exclamation-triangle error-icon"></i>
-                                        Проблемы совместимости
-                                    </div>
-                                    <div class="error-item">
-                                        <i class="fas fa-times-circle error-icon"></i>
-                                        Выбранный кулер Noctua NH-D15 может не поместиться в корпус Lian Li PC-O11 Dynamic
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Блок с ошибками (пример без ошибок) -->
-                            <div class="success-block">
-                                <div class="success-title">
-                                    <i class="fas fa-check-circle success-icon"></i>
-                                    Проблемы совместимости не обнаружены
-                                </div>
+                                @include('partials.configuration-errors', $configurationErrors = $value->errors)
                             </div>
                         </div>
                     @endforeach
             </div>
             @endif
-        </div>
         </div>
     </main>
 @endsection

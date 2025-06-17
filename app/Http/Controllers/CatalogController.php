@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Psu;
 use App\Models\Rams;
 use App\Models\Cooler;
+use App\Models\Vendor;
 use App\Models\Chassis;
 use App\Models\Storage;
 use App\Models\Processor;
@@ -20,10 +21,12 @@ class CatalogController extends Controller
     {
         $title = '';
         $data  = null;
+        $vendors = Vendor::where('type', '!=', 'processor')->get();
         switch ($componentTitle) {
             case 'processors':
                 $title = 'Процессоры';
                 $data  = Processor::with(['vendor', 'socket'])->get();
+                $vendors = Vendor::where('type', '=', 'processor')->get();
                 break;
             case 'motherboards':
                 $title = 'Материнские платы';
@@ -57,7 +60,8 @@ class CatalogController extends Controller
         return view('pages.components.' . $componentTitle . '.index', [
             'title' => $title,
             'data'  => $data,
-            'componentTitle' => $componentTitle
+            'componentTitle' => $componentTitle,
+            'vendors' => $vendors
         ]);
     }
 

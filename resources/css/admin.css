@@ -97,6 +97,11 @@
     color: var(--text-light);
 }
 
+.adm-mng-btn {
+    flex: 1;
+    min-width: 0;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .admin-grid {

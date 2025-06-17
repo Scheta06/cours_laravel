@@ -49,6 +49,6 @@ class Configuration extends Model
     }
 
     public function chassis() {
-        return $this->belongsTo(Cooler::class);
+        return $this->belongsTo(Chassis::class);
     }
 }

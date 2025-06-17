@@ -25,23 +25,31 @@
             <!-- Фильтры -->
             <div class="filters-card">
                 <div class="filter-group">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="search-input" placeholder="Поиск по названию...">
-                    </div>
 
-                    <div class="filter-controls">
-                        <select id="category-filter">
-                            <option value="">Все категории</option>
-                            @foreach ($category as $item)
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endforeach
-                        </select>
 
-                        <button id="reset-filters" class="btn btn-outline">
-                            <i class="fas fa-undo"></i> Сбросить
-                        </button>
-                    </div>
+                    <form id="filter-form" action="{{ route('manageItemForm') }}" method="GET" style="width: auto">
+                        <div class="filter-controls">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="search-input" name="search" value="{{ request('search') }}"
+                                    placeholder="Поиск по названию...">
+                            </div>
+                            <select id="category-filter" name="category" onchange="this.form.submit()">
+                                <option value="">Все категории</option>
+                                @foreach ($category as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ $selectedCategory == $item->id ? 'selected' : '' }}>
+                                        {{ $item->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button class="btn btn-outline" type="submit">
+                                Применить
+                            </button>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
 
@@ -81,7 +89,7 @@
                                     <td>
                                         <div class="action-buttons">
                                             <a href="{{ route('editItemForm', ['componentId' => $item->id, 'componentTitle' => $item->category->type]) }}"
-                                                class="btn btn-sm btn-outline">
+                                                class="btn btn-sm btn-outline adm-mng-btn">
                                                 <i class="fas fa-edit"></i> Изменить
                                             </a>
                                             <form
@@ -89,7 +97,8 @@
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-danger" type="submit" data-id="1001">
+                                                <button class="btn btn-sm btn-danger adm-mng-btn" type="submit"
+                                                    data-id="1001">
                                                     <i class="fas fa-trash"></i> Удалить
                                                 </button>
                                             </form>

@@ -11,106 +11,36 @@ use App\Models\Psu;
 use App\Models\Rams;
 use App\Models\Storage;
 use App\Models\Videocard;
+use App\Services\ConfigurationService;
+use App\Services\PcCompatibilityChecker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
+    protected $configService;
+
+    public function __construct(ConfigurationService $configService)
+    {
+        $configService = $this->configService;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PcCompatibilityChecker $checker, ConfigurationService $configService, Request $request)
     {
-        $configurationErrors = [];
+        $components = $configService->getComponents();
 
-        $configuration = session('configuration', [
-            'processors' => null,
-            'motherboards' => null,
-            'coolers' => null,
-            'rams' => null,
-            'storages' => null,
-            'videocards' => null,
-            'psus' => null,
-            'chassis' => null,
-        ]);
-
-        $components = [
-            'processor' => $configuration['processors'] ? Processor::find($configuration['processors']) : null,
-            'motherboard' => $configuration['motherboards'] ? Motherboard::find($configuration['motherboards']) : null,
-            'cooler' => $configuration['coolers'] ? Cooler::find($configuration['coolers']) : null,
-            'ram' => $configuration['rams'] ? Rams::find($configuration['rams']) : null,
-            'storage' => $configuration['storages'] ? Storage::find($configuration['storages']) : null,
-            'videocard' => $configuration['videocards'] ? Videocard::find($configuration['videocards']) : null,
-            'psu' => $configuration['psus'] ? Psu::find($configuration['psus']) : null,
-            'case' => $configuration['chassis'] ? Chassis::find($configuration['chassis']) : null,
-        ];
-        // Проверка сокета процессора и материнской платы
-        if (
-            isset($components['processor'], $components['motherboard']) &&
-            $components['processor'] !== null &&
-            $components['motherboard'] !== null &&
-            isset($components['processor']->socket, $components['motherboard']->socket) &&
-            $components['processor']->socket->title !== $components['motherboard']->socket->title
-        ) {
-            $processor = $components['processor'];
-            $motherboard = $components['motherboard'];
-            $errorTitle = 'Процессор ' . $processor->vendor->title . ' ' . $processor->title . ' не совместим с материнской платой ' . $motherboard->vendor->title . ' ' . $motherboard->chipset->title . ' ' . $motherboard->title . ' (разные сокеты)';
-
-            $configurationErrors['processor_and_motherboard'] = $errorTitle;
-        }
-        // Проверка тепловыделения процессора для кулера
-        if (
-            isset($components['processor'], $components['cooler']) &&
-            $components['processor'] !== null &&
-            $components['cooler'] !== null &&
-            isset($components['processor']->tdp, $components['cooler']->power) &&
-            $components['processor']->tdp > $components['cooler']->power
-        ) {
-            $processor = $components['processor'];
-            $cooler = $components['cooler'];
-
-            $errorTitle = 'Процессор ' . $processor->vendor->title . ' ' . $processor->title . ' не совместим с кулером ' . $cooler->vendor->title . ' ' . $cooler->title . ' из-за тепловыделения процессором ' . $processor->tdp . 'Вт';
-
-            $configurationErrors['processor_and_cooler'] = $errorTitle;
-        }
-        // Проверка тепловыделения процессора и видеокарты для блока питания
-        if (
-            isset($components['processor'], $components['videocard'], $components['psu']) &&
-            $components['processor'] !== null &&
-            $components['videocard'] !== null &&
-            $components['psu'] !== null &&
-            isset($components['processor']->tdp, $components['videocard']->tdp, $components['psu']->power) &&
-            $components['processor']->tdp + $components['videocard']->tdp > $components['psu']->power
-        ) {
-            $processor = $components['processor']->vendor->title . ' ' . $components['processor']->title;
-            $videocard = $components['videocard']->vendor->title . ' ' . $components['videocard']->title;
-            $psu = $components['psu']->vendor->title . ' ' . $components['psu']->title;
-
-            $errorTitle = 'Тепловыделение процессора ' . $processor . ' и видеокарты ' . $videocard . ' превышают мощность блока питания ' . $psu;
-
-            $configurationErrors['processor_videocard_and_psu'] = $errorTitle;
-        }
-        // Проверка на совместимость типа памяти у материнской платы и оперативной памяти
-        if (
-            isset($components['motherboard'], $components['ram']) &&
-            $components['motherboard'] !== null &&
-            $components['ram'] !== null &&
-            isset($components['motherboard']->memoryType->title, $components['ram']->memoryType->title) &&
-            $components['motherboard']->memoryType->title !== $components['ram']->memoryType->title
-        ) {
-            $motherboard = $components['motherboard']->vendor->title . ' ' . $components['motherboard']->chipset->title . ' ' . $components['motherboard']->title;
-            $ram = $components['ram']->vendor->title . ' ' . $components['ram']->title;
-
-            $errorTitle = 'Материнская плата ' . $motherboard . ' не совместима с оперативной памятью ' . $ram . ' (разные типы памяти)';
-
-            $configurationErrors['motherboard_and_ram'] = $errorTitle;
-        }
+        $configurationErrors = $checker->check($components);
 
         $componentList = config('constans.componentList');
 
         foreach ($componentList as $key => &$item) {
             if ($key !== 'chassis') {
                 $componentKey = preg_replace('/s$/', '', $key);
+            } else {
+                $componentKey = $key;
             }
 
             $item['selectedComponent'] = $components[$componentKey] ?? null;
@@ -118,7 +48,7 @@ class ConfigurationController extends Controller
 
         return view('index', [
             'componentList' => $componentList,
-            'configuration' => $configuration,
+            'configuration' => $configService->loadConfiguration(),
             'configurationErrors' => $configurationErrors
         ]);
     }
@@ -134,22 +64,13 @@ class ConfigurationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $componentTitle, $componentId)
+    public function store(Request $request, $componentTitle, $componentId, ConfigurationService $configService)
     {
-        $configuration = session('configuration', [
-            'processors' => null,
-            'motherboards' => null,
-            'coolers' => null,
-            'rams' => null,
-            'storages' => null,
-            'videocards' => null,
-            'psus' => null,
-            'chassis' => null,
-        ]);
+        $data = [
+            $componentTitle => $componentId
+        ];
 
-        $configuration[$componentTitle] = $componentId;
-
-        session(['configuration' => $configuration]);
+        $configService->saveToSession($data);
 
         return redirect()->route('index')->with('success', 'Компонент успешно добавлен');
     }
@@ -173,21 +94,26 @@ class ConfigurationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, ConfigurationService $configService)
     {
         $build = session('configuration', []);
         $requiredComponents = [
-            'processors',
-            'motherboards',
-            'coolers',
-            'rams',
-            'storages',
-            'videocards',
-            'psus',
-            'chassis',
+            'processors' => 'Процессор',
+            'motherboards' => 'Материнская плата',
+            'coolers' => 'Кулер',
+            'rams' => 'Оперативная память',
+            'storages' => 'Накопитель',
+            'videocards' => 'Видеокарта',
+            'psus' => 'Блок питания',
+            'chassis' => 'Корпус',
         ];
 
-        $missing = array_diff($requiredComponents, array_keys($build));
+        $missing = [];
+        foreach ($requiredComponents as $key => $name) {
+            if (empty($build[$key])) {
+                $missing[] = $name;
+            }
+        }
 
         if (!empty($missing)) {
             return redirect()->back()->withErrors([
@@ -195,10 +121,11 @@ class ConfigurationController extends Controller
             ]);
         }
 
+        // Создаём конфигурацию
         Configuration::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::id(),
             'processor_id' => $build['processors'],
             'motherboard_id' => $build['motherboards'],
             'cooler_id' => $build['coolers'],
@@ -209,7 +136,7 @@ class ConfigurationController extends Controller
             'chassis_id' => $build['chassis'],
         ]);
 
-        session()->forget('configuration');
+        $configService->clearConfiguration();
 
         return redirect()->route('index')->with('success', 'Сборка сохранена!');
     }

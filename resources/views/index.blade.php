@@ -19,7 +19,6 @@
                         <textarea id="build-desc" placeholder="Опишите назначение сборки (игры, работа, дизайн)..." rows="3"
                             name="description"></textarea>
                     </div>
-                    {{-- @dd($configuration) --}}
                     <div class="components-selection">
                         <h2>Выберите компоненты</h2>
                         @foreach ($componentList as $key => $value)
@@ -49,32 +48,8 @@
                             </div>
                         @endforeach
                     </div>
-                    @if ($configurationErrors)
-                        <!-- Внутри build-form, перед form-actions -->
-                        <div class="compatibility-errors">
-                            <h3><i class="fas fa-exclamation-triangle"></i> Проверка совместимости</h3>
-                            <div class="errors-list">
-                                @foreach ($configurationErrors as $key => $value)
-                                    <div class="error-item">
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <span>{{ $value }}</span>
-                                    </div>
-                                @endforeach
-                                <!-- Статичные примеры ошибок -->
 
-                            </div>
-                        </div>
-                    @else
-                        <div class="compatibility-errors">
-                            <h3><i class="fas fa-check-circle"></i> Проверка совместимости</h3>
-                            <div class="errors-list">
-                                <div class="no-errors">
-                                    <i class="fas fa-check"></i>
-                                    <span>Все компоненты совместимы</span>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                    @include('partials.configuration-errors', $configurationErrors)
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary btn-lg">
