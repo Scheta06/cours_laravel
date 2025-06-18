@@ -141,7 +141,7 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($componentTitle)
+    public function create($componentTitle, Request $request)
     {
         $data = [];
         $vendor = Vendor::all();
@@ -150,6 +150,14 @@ class AdminController extends Controller
         $chipset = Chipset::all();
         $memoryType = MemoryType::all();
         $memoryCapacity = MemoryCapacity::all();
+        $processorVendor = $request->input('vendor_id');
+
+        $filterItems = function ($query) use ($processorVendor) {
+            $vendor = Vendor::find($processorVendor)->title;
+
+
+        };
+
         switch ($componentTitle) {
             case 'processors':
                 array_push($data, [

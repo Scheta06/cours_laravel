@@ -58,7 +58,6 @@
                 <table class="products-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Название</th>
                             <th>Категория</th>
                             <th>Действия</th>
@@ -69,7 +68,6 @@
                         @foreach ($data as $key => $value)
                             @foreach ($value as $item)
                                 <tr data-category="cpu">
-                                    <td>{{ $item->id }}</td>
                                     <td>
                                         <a
                                             href="{{ route('component', ['componentTitle' => $item->category->type, 'componentId' => $item->id]) }}">

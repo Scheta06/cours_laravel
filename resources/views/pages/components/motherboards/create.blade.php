@@ -59,6 +59,16 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="cpu-cores">Сокет*</label>
+                                <select name="socket_id" id="">
+                                    <option value="">Выберите сокет</option>
+                                    @foreach ($data[0]['socket'] as $item)
+                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="cpu-cores">Чипсет*</label>
                                 <select name="chipset_id" id="">
                                     <option value="">Выберите чипсет</option>
@@ -73,16 +83,6 @@
                                 <select name="form_id" id="">
                                     <option value="">Выберите форм-фактор</option>
                                     @foreach ($data[0]['form'] as $item)
-                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cpu-cores">Сокет*</label>
-                                <select name="socket_id" id="">
-                                    <option value="">Выберите сокет</option>
-                                    @foreach ($data[0]['socket'] as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
                                     @endforeach
                                 </select>

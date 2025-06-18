@@ -98,13 +98,17 @@
 }
 
 .adm-mng-btn {
-    flex: 1;
-    min-width: 0;
+    min-width: 169px;
+    width: auto;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
     .admin-grid {
         grid-template-columns: 1fr;
+    }
+
+    .adm-mng-btn {
+        min-width: 100%;
     }
 }

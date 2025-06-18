@@ -1,8 +1,8 @@
-<!-- Подвал -->
+// Подвал
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-col">
+            <div class="footer-col">Ы
                 <h3>My PC</h3>
                 <p>Сервис для сборки компьютеров с 2025 года</p>
                 <div class="social-links">
@@ -19,7 +19,7 @@
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Контакты</h3> 
+                <h3>Контакты</h3>
                 <ul>
                     <li><i class="fas fa-envelope"></i> schetacrown06@gmail.com</li>
                     <li><i class="fas fa-phone"></i> +7 (800) 800-66-66</li>

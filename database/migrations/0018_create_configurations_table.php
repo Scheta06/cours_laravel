@@ -56,7 +56,7 @@ return new class extends Migration
                 ->on('psus')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('chassis_id')
+            $table->foreignId(' ')
                 ->references('id')
                 ->on('chassis')
                 ->onUpdate('cascade')

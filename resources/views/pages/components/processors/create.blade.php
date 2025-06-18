@@ -48,12 +48,16 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="cpu-cores">Производитель*</label>
-                                <select name="vendor_id" id="">
-                                    <option value="">Выберите производителя</option>
-                                    @foreach ($data[0]['vendor'] as $item)
-                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                    @endforeach
-                                </select>
+                                <form action="{{ route('createItemForm', ['componentTitle' => $componentTitle]) }}"
+                                    method="GET">
+                                    @method('GET')
+                                    <select name="vendor_id" id="" >
+                                        <option value="">Выберите производителя</option>
+                                        @foreach ($data[0]['vendor'] as $item)
+                                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
                             </div>
 
                             <div class="form-group">
@@ -85,13 +89,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="cpu-max-freq">Макс. частота (ГГц)</label>
+                                <label for="cpu-max-freq">Макс. частота (ГГц)*</label>
                                 <input type="number" id="cpu-max-freq" step="0.1" min="0.5" max="6.0"
                                     name="max_frequency" placeholder="4.6">
                             </div>
 
                             <div class="form-group">
-                                <label for="cpu-tdp">TDP (Вт)</label>
+                                <label for="cpu-tdp">TDP (Вт)*</label>
                                 <input type="number" id="cpu-tdp" min="10" name="tdp" max="300"
                                     placeholder="65">
                             </div>

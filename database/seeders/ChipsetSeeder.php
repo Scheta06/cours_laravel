@@ -11,35 +11,37 @@ class ChipsetSeeder extends Seeder
      */
     public function run(): void
     {
+        $AMD = 'AMD';
+        $Intel = 'Intel';
         $Array = [
             [
-                'title'     => 'A520',
-                'type'      => 'amd',
+                'title' => 'A520',
+                'type' => $AMD,
                 'socket_id' => 1,
             ],
             [
-                'title'     => 'B550',
-                'type'      => 'amd',
+                'title' => 'B550',
+                'type' => $AMD,
                 'socket_id' => 1,
             ],
             [
-                'title'     => 'X570',
-                'type'      => 'amd',
+                'title' => 'X570',
+                'type' => $AMD,
                 'socket_id' => 1,
             ],
             [
-                'title'     => 'H610',
-                'type'      => 'intel',
+                'title' => 'H610',
+                'type' => $Intel,
                 'socket_id' => 4,
             ],
             [
-                'title'     => 'B760',
-                'type'      => 'intel',
+                'title' => 'B760',
+                'type' => $Intel,
                 'socket_id' => 4,
             ],
             [
-                'title'     => 'Z790',
-                'type'      => 'intel',
+                'title' => 'Z790',
+                'type' => $Intel,
                 'socket_id' => 4,
             ],
         ];
