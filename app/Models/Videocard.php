@@ -12,6 +12,7 @@ class Videocard extends Model
         'max_frequency',
         'category_id',
         'vendor_id',
+        'tdp',
         'memory_capacity_id',
         'memory_type_id',
     ];

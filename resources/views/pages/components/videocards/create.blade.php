@@ -52,11 +52,11 @@
                                 <input type="text" name="max_frequency" id="cpu-cores" min="1" max="5000"
                                     placeholder="1240" required>
                             </div>
-
+                            
                             <div class="form-group">
                                 <label for="cpu-cores">Тепловыделение (Вт)*</label>
                                 <input type="text" name="tdp" id="cpu-cores" min="1" max="5000"
-                                    placeholder="1240" required>
+                                    placeholder="75" required>
                             </div>
 
                             <div class="form-group">
