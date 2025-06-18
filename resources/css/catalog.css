@@ -156,6 +156,12 @@
     gap: 10px;
 }
 
+.btn-filter {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-size: 1rem;
+}
+
 .price-range {
     display: flex;
     flex-direction: column;

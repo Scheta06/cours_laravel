@@ -52,7 +52,7 @@
 
                 </div>
             </div>
-
+            @include('partials.notification')
             <!-- Таблица товаров -->
             <div class="products-table-container">
                 <table class="products-table">

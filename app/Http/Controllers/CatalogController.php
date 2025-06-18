@@ -1,15 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Chassis;
+use App\Models\Cooler;
+use App\Models\Motherboard;
+use App\Models\Processor;
 use App\Models\Psu;
 use App\Models\Rams;
-use App\Models\Cooler;
-use App\Models\Vendor;
-use App\Models\Chassis;
 use App\Models\Storage;
-use App\Models\Processor;
+use App\Models\Vendor;
 use App\Models\Videocard;
-use App\Models\Motherboard;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -17,51 +17,60 @@ class CatalogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($componentTitle)
+    public function index($componentTitle, Request $request)
     {
+        $vendor = $request->input('vendor');
+        $serchItem = $request->input('serchTitle');
+
+        $filterItems = function ($query) use ($vendor, $serchItem) {
+            if ($vendor) {
+                $query->where(['vendor_id' => $vendor]);
+            }
+        };
+
         $title = '';
-        $data  = null;
+        $data = null;
         $vendors = Vendor::where('type', '!=', 'processor')->get();
         switch ($componentTitle) {
             case 'processors':
                 $title = 'Процессоры';
-                $data  = Processor::with(['vendor', 'socket'])->get();
+                $data = Processor::with(['vendor', 'socket'])->where($filterItems)->get();
                 $vendors = Vendor::where('type', '=', 'processor')->get();
                 break;
             case 'motherboards':
                 $title = 'Материнские платы';
-                $data  = Motherboard::with(['vendor', 'chipset'])->get();
+                $data = Motherboard::with(['vendor', 'chipset'])->where($filterItems)->get();
                 break;
             case 'coolers':
                 $title = 'Кулеры';
-                $data  = Cooler::with(['vendor'])->get();
+                $data = Cooler::with(['vendor'])->where($filterItems)->get();
                 break;
             case 'storages':
                 $title = 'Накопители';
-                $data  = Storage::with(['vendor'])->get();
+                $data = Storage::with(['vendor'])->where($filterItems)->get();
                 break;
             case 'rams':
                 $title = 'Оперативная память';
-                $data  = Rams::with(['vendor'])->get();
+                $data = Rams::with(['vendor'])->where($filterItems)->get();
                 break;
             case 'videocards':
                 $title = 'Видеокарты';
-                $data  = Videocard::with(['vendor'])->get();
+                $data = Videocard::with(['vendor'])->where($filterItems)->get();
                 break;
             case 'psus':
                 $title = 'Блоки питания';
-                $data  = Psu::with(['vendor'])->get();
+                $data = Psu::with(['vendor'])->where($filterItems)->get();
                 break;
             case 'chassis':
                 $title = 'Корпусы';
-                $data  = Chassis::with(['vendor'])->get();
+                $data = Chassis::with(['vendor'])->where($filterItems)->get();
                 break;
         }
         return view('pages.components.' . $componentTitle . '.index', [
             'title' => $title,
-            'data'  => $data,
+            'data' => $data,
             'componentTitle' => $componentTitle,
-            'vendors' => $vendors
+            'vendors' => $vendors,
         ]);
     }
 
@@ -116,7 +125,7 @@ class CatalogController extends Controller
         }
         return view('pages.components.' . $componentTitle . '.show', [
             'data' => $data,
-            'componentTitle' => $componentTitle
+            'componentTitle' => $componentTitle,
         ]);
     }
 

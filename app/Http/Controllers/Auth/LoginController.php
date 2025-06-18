@@ -34,7 +34,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($data)) {
-            return redirect()->route('index');
+            return redirect()->route('index')->with('success', 'Вы вошли в аккаунт');
         }
 
         return back()->withErrors([
