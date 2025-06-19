@@ -37,10 +37,6 @@
                                     <div class="product-specs">
                                         <div class="spec-item">
                                             <i class="fas fa-microchip"></i>
-                                            <span>Сокет - {{ $item->socket->title }}</span>
-                                        </div>
-                                        <div class="spec-item">
-                                            <i class="fas fa-microchip"></i>
                                             <span>Чипсет - {{ $item->chipset->title }}</span>
                                         </div>
                                         <div class="spec-item">

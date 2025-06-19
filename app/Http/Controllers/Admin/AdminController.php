@@ -20,8 +20,6 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Videocard;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
-use Termwind\Components\Raw;
 
 class AdminController extends Controller
 {
@@ -134,7 +132,7 @@ class AdminController extends Controller
             'data' => $data,
             'category' => $category,
             'searchTerm' => $searchTerm,
-            'selectedCategory' => $selectedCategory
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
@@ -151,12 +149,6 @@ class AdminController extends Controller
         $memoryType = MemoryType::all();
         $memoryCapacity = MemoryCapacity::all();
         $processorVendor = $request->input('vendor_id');
-
-        $filterItems = function ($query) use ($processorVendor) {
-            $vendor = Vendor::find($processorVendor)->title;
-
-
-        };
 
         switch ($componentTitle) {
             case 'processors':
@@ -264,7 +256,8 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show() {}
+    public function show()
+    {}
 
     /**
      * Show the form for editing the specified resource.

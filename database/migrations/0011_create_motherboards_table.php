@@ -21,11 +21,6 @@ return new class extends Migration
                 ->on('vendors')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('socket_id')
-                ->references('id')
-                ->on('vendors')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->foreignId('chipset_id')
                 ->references('id')
                 ->on('chipsets')

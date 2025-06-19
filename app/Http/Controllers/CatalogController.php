@@ -39,7 +39,7 @@ class CatalogController extends Controller
                 break;
             case 'motherboards':
                 $title = 'Материнские платы';
-                $data = Motherboard::with(['vendor', 'chipset'])->where($filterItems)->get();
+                $data = Motherboard::with(['vendor', 'chipset', 'socket'])->where($filterItems)->get();
                 break;
             case 'coolers':
                 $title = 'Кулеры';

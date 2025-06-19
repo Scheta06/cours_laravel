@@ -59,16 +59,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="cpu-cores">Сокет*</label>
-                                <select name="socket_id" id="">
-                                    <option value="">Выберите сокет</option>
-                                    @foreach ($data[0]['socket'] as $item)
-                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="cpu-cores">Чипсет*</label>
                                 <select name="chipset_id" id="">
                                     <option value="">Выберите чипсет</option>
@@ -105,14 +95,12 @@
 
                     <!-- Кнопки отправки -->
                     <div class="form-actions">
-
                         <a href="{{ route('categoryOfCreateItemForm') }}" type="button" class="btn btn-outline">
                             <i class="fas fa-times"></i> Отменить
                         </a>
                         <button type="submit" class="btn btn-success">
                             <i class="fas fa-save"></i> Сохранить
                         </button>
-
                     </div>
                 </form>
             </div>
