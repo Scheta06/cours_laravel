@@ -14,14 +14,14 @@ class UserSeeder extends Seeder
     {
         $Array = [
             [
-                'name'     => 'Scheta',
-                'email'    => 'schetacrown06@gmail.com',
+                'name'     => 'Admin',
+                'email'    => 'admin@example.com',
                 'role'     => 'admin',
                 'password' => Hash::make('123123123'),
             ],
             [
                 'name'     => 'User',
-                'email'    => 'user@gmail.com',
+                'email'    => 'user@example.com',
                 'role'     => 'user',
                 'password' => Hash::make('123123123'),
             ],
