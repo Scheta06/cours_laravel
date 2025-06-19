@@ -1,4 +1,3 @@
-// Шапка
 <header class="header">
     <div class="container">
         <a href="{{ route('index') }}" class="logo">

@@ -1,8 +1,7 @@
-// Подвал
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
-            <div class="footer-col">Ы
+            <div class="footer-col">
                 <h3>My PC</h3>
                 <p>Сервис для сборки компьютеров с 2025 года</p>
                 <div class="social-links">

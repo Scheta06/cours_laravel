@@ -25,10 +25,9 @@ class PcCompatibilityChecker
 
         $processor = $components['processor'];
         $motherboard = $components['motherboard'];
-
         if ($processor &&
                 $motherboard &&
-                $processor->socket->title !== $motherboard->socket->title) {
+                $processor->socket->id !== $motherboard->chipset->socket_id) {
             $errors['processor_and_motherboard'] = sprintf(
                 'Процессор %s %s не совместим с материнской платой %s %s %s (разные сокеты)',
                 $processor->vendor->title,

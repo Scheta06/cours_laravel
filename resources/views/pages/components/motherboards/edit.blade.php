@@ -92,18 +92,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="cpu-cores">Сокет*</label>
-                                <select name="socket_id" id="">
-                                    <option value="">Выберите сокет</option>
-                                    @foreach ($data['relations']['socket'] as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ old('socket_id', $data['componentInfo']->socket_id) == $item->id ? 'selected' : '' }}>
-                                            {{ $item->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
                                 <label for="cpu-cores">Тип памяти*</label>
                                 <select name="memory_type_id" id="">
                                     <option value="">Выберите тип памяти</option>

@@ -48,16 +48,14 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="cpu-cores">Производитель*</label>
-                                <form action="{{ route('createItemForm', ['componentTitle' => $componentTitle]) }}"
-                                    method="GET">
-                                    @method('GET')
-                                    <select name="vendor_id" id="" >
-                                        <option value="">Выберите производителя</option>
-                                        @foreach ($data[0]['vendor'] as $item)
-                                            <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </form>
+
+                                <select name="vendor_id" id="">
+                                    <option value="">Выберите производителя</option>
+                                    @foreach ($data[0]['vendor'] as $item)
+                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
 
                             <div class="form-group">
@@ -106,14 +104,12 @@
 
                     <!-- Кнопки отправки -->
                     <div class="form-actions">
-
                         <a href="{{ route('categoryOfCreateItemForm') }}" type="button" class="btn btn-outline">
                             <i class="fas fa-times"></i> Отменить
                         </a>
                         <button type="submit" class="btn btn-success">
                             <i class="fas fa-save"></i> Сохранить
                         </button>
-
                     </div>
                 </form>
             </div>

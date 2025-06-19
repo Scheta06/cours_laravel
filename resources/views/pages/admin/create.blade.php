@@ -3,11 +3,7 @@
 @section('content')
     <main class="main admin-page">
         <div class="container">
-            @if (session('success'))
-                <div class="notifications-container" id="notifications">
-                    {{ session('success') }}
-                </div>
-            @endif
+
             <!-- Хлебные крошки -->
             <div class="breadcrumbs">
                 <a href="{{ route('index') }}">Главная</a>
@@ -23,8 +19,9 @@
                 <i class="fas fa-plus-circle"></i> Создание нового товара
             </h1>
 
-            <div class="admin-form-container">
+            @include('partials.notification')
 
+            <div class="admin-form-container">
 
                 <div class="form-step active" id="step-category">
                     <h2 class="step-title">
