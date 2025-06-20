@@ -34,12 +34,10 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($data)) {
-            return redirect()->route('index')->with('success', 'Вы вошли в аккаунт');
+            return redirect()->route('index');
         }
 
-        return back()->withErrors([
-            'name' => 'Неверные учетные данные',
-        ]);
+        return back()->with('erros', 'Неверные учетные данные');
     }
 
     /**

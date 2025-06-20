@@ -19,6 +19,14 @@
                         <textarea id="build-desc" placeholder="Опишите назначение сборки (игры, работа, дизайн)..." rows="3"
                             name="description"></textarea>
                     </div>
+                    @if (session('success'))
+                        @include('partials.notification')
+                    @else
+                        @include('partials.errors')
+                    @endif
+
+
+
                     <div class="components-selection">
                         <h2>Выберите компоненты</h2>
                         @foreach ($componentList as $key => $value)

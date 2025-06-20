@@ -17,6 +17,7 @@
             <h1 class="page-title">
                 <i class="fas fa-microchip"></i> Создать процессор
             </h1>
+            @include('partials.errors')
             <div class="admin-form-container">
                 <form class="product-form" action="{{ route('storeItemForm', ['componentTitle' => $componentTitle]) }}"
                     method="POST">

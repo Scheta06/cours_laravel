@@ -54,14 +54,6 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request, $componentTitle, $componentId, ConfigurationService $configService)
@@ -76,36 +68,20 @@ class ConfigurationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, ConfigurationService $configService)
     {
         $build = session('configuration', []);
         $requiredComponents = [
-            'processors' => 'Процессор',
-            'motherboards' => 'Материнская плата',
-            'coolers' => 'Кулер',
-            'rams' => 'Оперативная память',
-            'storages' => 'Накопитель',
-            'videocards' => 'Видеокарта',
-            'psus' => 'Блок питания',
-            'chassis' => 'Корпус',
+            'processors' => '- Процессор',
+            'motherboards' => '- Материнская плата',
+            'coolers' => '- Кулер',
+            'rams' => '- Оперативная память',
+            'storages' => '- Накопитель',
+            'videocards' => '- Видеокарта',
+            'psus' => '- Блок питания',
+            'chassis' => '- Корпус',
         ];
 
         $missing = [];
@@ -114,11 +90,14 @@ class ConfigurationController extends Controller
                 $missing[] = $name;
             }
         }
-
         if (!empty($missing)) {
-            return redirect()->back()->withErrors([
-                'message' => 'Выберите недостающие компоненты: ' . implode(', ', $missing),
-            ]);
+            return redirect()->back()->with(
+                'errors',
+                [
+                    'title' => 'Выберите недостающие комплектующие',
+                    'errors' => $missing
+                ],
+            );
         }
 
         // Создаём конфигурацию
@@ -138,7 +117,7 @@ class ConfigurationController extends Controller
 
         $configService->clearConfiguration();
 
-        return redirect()->route('index')->with('success', 'Сборка сохранена!');
+        return redirect()->route('index')->with('success', 'Конфигурация сохранена!');
     }
 
     /**
@@ -150,6 +129,6 @@ class ConfigurationController extends Controller
 
         $configuration->delete();
 
-        return redirect()->back()->with('success', 'Конфигурация удалена');
+        return redirect()->back()->with('success', 'Конфигурация удалена!');
     }
 }

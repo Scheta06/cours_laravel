@@ -103,11 +103,23 @@ img {
     align-items: center;
 }
 
-.success-message {
+.message {
     margin-top: 10px;
-    padding: 10px;
-    background: #d4edda;
-    color: #155724;
+    padding: 10px 15px;
     border-radius: 4px;
     font-weight: 600;
+    position: fixed;
+    top: 85px;
+    right: 10px;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+}
+
+.dangar-message {
+    max-width: 450px;
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: #fff;
 }

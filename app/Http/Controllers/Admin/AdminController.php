@@ -217,7 +217,30 @@ class AdminController extends Controller
     {
         switch ($componentTitle) {
             case 'processors':
-                $data = $request->all();
+                $data = $request->validate([
+                    'title' => 'required|string',
+                    'description' => 'string',
+                    'count_of_cores' => 'integer|required',
+                    'count_of_streams' => 'integer|required',
+                    'base_frequency' => 'decimal:1,3|required',
+                    'max_frequency' => 'decimal:1,3|required',
+                    'tdp' => 'integer|required',
+                    'vendor_id' => 'integer|required',
+                    'socket_id' => 'integer|required',
+                    'category_id' => 'integer|required',
+                ], [
+                    'tdp.integer' => 'Поле `Тепловыделение `(TDP)` должно быть целым числом',
+                    'tdp.required' => 'Поле `Тепловыделение `(TDP)`обязательно к заполнению',
+                ]);
+                if ($data->fails()) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([
+                            'title' => 'Выберите недостающие комплектующие',
+                            'components' => 'Не все комплектующие выбраны'
+                        ])
+                        ->withInput();
+                }
                 Processor::create($data);
                 break;
             case 'motherboards':
@@ -256,8 +279,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
-    {}
+    public function show() {}
 
     /**
      * Show the form for editing the specified resource.
