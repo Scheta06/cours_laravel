@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Configuration;
-use App\Models\Processor;
 use App\Services\ConfigurationService;
 use App\Services\PcCompatibilityChecker;
 use Illuminate\Http\Request;

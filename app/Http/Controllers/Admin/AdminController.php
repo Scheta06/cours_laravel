@@ -54,48 +54,7 @@ class AdminController extends Controller
 
     public function category()
     {
-        $categoryInfo = [
-            'processors' => [
-                'title' => 'Процессор',
-                'subtitle' => 'Центральные процессоры (CPU)',
-                'icon' => 'fas fa-microchip',
-            ],
-            'motherboards' => [
-                'title' => 'Материнская плата',
-                'subtitle' => 'Системные платы (MB)',
-                'icon' => 'fas fa-project-diagram',
-            ],
-            'coolers' => [
-                'title' => 'Охлаждение',
-                'subtitle' => 'Кулеры и СЖО',
-                'icon' => 'fas fa-fan',
-            ],
-            'rams' => [
-                'title' => 'Оперативная память',
-                'subtitle' => 'Модули RAM',
-                'icon' => 'fas fa-memory',
-            ],
-            'storages' => [
-                'title' => 'Накопитель',
-                'subtitle' => 'SSD и HDD',
-                'icon' => 'fas fa-hdd',
-            ],
-            'videocards' => [
-                'title' => 'Видеокарта',
-                'subtitle' => 'Графические процессоры (GPU)',
-                'icon' => 'fas fa-gamepad',
-            ],
-            'psus' => [
-                'title' => 'Блок питания',
-                'subtitle' => 'Источники питания (PSU)',
-                'icon' => 'fas fa-bolt',
-            ],
-            'chassis' => [
-                'title' => 'Корпус',
-                'subtitle' => 'Компьютерные корпуса',
-                'icon' => 'fas fa-desktop',
-            ],
-        ];
+        $categoryInfo = config('constans.categoryInfo');
         return view('pages.admin.create', [
             'categoryInfo' => $categoryInfo,
         ]);
@@ -215,6 +174,8 @@ class AdminController extends Controller
      */
     public function store(Request $request, $componentTitle)
     {
+        $required = 'обязательно к заполнению';
+        $float = 'должно быть с плавающей точкой';
         switch ($componentTitle) {
             case 'processors':
                 $data = $request->validate([
@@ -229,16 +190,14 @@ class AdminController extends Controller
                     'socket_id' => 'integer|required',
                     'category_id' => 'integer|required',
                 ], [
-                    'tdp.integer' => 'Поле `Тепловыделение `(TDP)` должно быть целым числом',
-                    'tdp.required' => 'Поле `Тепловыделение `(TDP)`обязательно к заполнению',
+                    'title' => 'Поле `Название` обязательно к заполнению и должно быть строкой',
+                    'cours_of_cores' => 'Поле `Количество ядер` обязательно ',
+                    'base_frequency' => sprintf('Поле `Базовая частота (ГГц)` %s и %s', $required, $float)
                 ]);
                 if ($data->fails()) {
                     return redirect()
                         ->back()
-                        ->withErrors([
-                            'title' => 'Выберите недостающие комплектующие',
-                            'components' => 'Не все комплектующие выбраны'
-                        ])
+                        ->withErrors($data)
                         ->withInput();
                 }
                 Processor::create($data);

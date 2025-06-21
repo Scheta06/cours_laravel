@@ -17,7 +17,9 @@
             <h1 class="page-title">
                 <i class="fas fa-microchip"></i> Создать процессор
             </h1>
-            @include('partials.errors')
+
+            @include('partials.create-item-errors')
+
             <div class="admin-form-container">
                 <form class="product-form" action="{{ route('storeItemForm', ['componentTitle' => $componentTitle]) }}"
                     method="POST">
@@ -95,7 +97,7 @@
 
                             <div class="form-group">
                                 <label for="cpu-tdp">TDP (Вт)*</label>
-                                <input type="number" id="cpu-tdp" min="10" name="tdp" max="300"
+                                <input id="cpu-tdp" min="10" name="tdp" max="300"
                                     placeholder="65">
                             </div>
 

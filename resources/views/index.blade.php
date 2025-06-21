@@ -10,14 +10,14 @@
                     @csrf
                     <div class="form-group">
                         <label for="build-name">Название сборки*</label>
-                        <input type="text" id="build-name" placeholder="Например: Игровой ПК до 100 000₽" name="title"
+                        <input type="text" id="build-name" placeholder="Например: Игровой ПК до 100 000₽" name="title" value="{{ old('title') }}"
                             required>
                     </div>
 
                     <div class="form-group">
                         <label for="build-desc">Описание</label>
                         <textarea id="build-desc" placeholder="Опишите назначение сборки (игры, работа, дизайн)..." rows="3"
-                            name="description"></textarea>
+                            name="description">{{ old('description') }}</textarea>
                     </div>
                     @if (session('success'))
                         @include('partials.notification')

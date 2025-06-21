@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -18,10 +19,7 @@ class LoginController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +32,7 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($data)) {
-            return redirect()->route('index');
+            return redirect()->intended(route('index'));
         }
 
         return back()->with('erros', 'Неверные учетные данные');
@@ -70,7 +68,7 @@ class LoginController extends Controller
     public function destroy()
     {
         Auth::logout();
-
+        session()->flush();
         return redirect()->route('index');
     }
 }

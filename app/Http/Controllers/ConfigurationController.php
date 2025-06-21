@@ -2,15 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chassis;
 use App\Models\Configuration;
-use App\Models\Cooler;
-use App\Models\Motherboard;
-use App\Models\Processor;
-use App\Models\Psu;
-use App\Models\Rams;
-use App\Models\Storage;
-use App\Models\Videocard;
 use App\Services\ConfigurationService;
 use App\Services\PcCompatibilityChecker;
 use Illuminate\Http\Request;
@@ -74,14 +66,14 @@ class ConfigurationController extends Controller
     {
         $build = session('configuration', []);
         $requiredComponents = [
-            'processors' => '- Процессор',
-            'motherboards' => '- Материнская плата',
-            'coolers' => '- Кулер',
-            'rams' => '- Оперативная память',
-            'storages' => '- Накопитель',
-            'videocards' => '- Видеокарта',
-            'psus' => '- Блок питания',
-            'chassis' => '- Корпус',
+            'processors' => 'Процессор',
+            'motherboards' => 'Материнская плата',
+            'coolers' => 'Кулер',
+            'rams' => 'Оперативная память',
+            'storages' => 'Накопитель',
+            'videocards' => 'Видеокарта',
+            'psus' => 'Блок питания',
+            'chassis' => 'Корпус',
         ];
 
         $missing = [];
